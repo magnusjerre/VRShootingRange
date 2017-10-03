@@ -1,20 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MouseFire : MonoBehaviour
 {
+    private IWeapon weapon;
+    private MJPlayer player;
+
+    void Start()
+    {
+        weapon = GetComponent<IWeapon>();
+        if (weapon == null)
+        {
+            throw new NullReferenceException("MouseFire must have a weapon");
+        }
+
+        player = GetComponentInParent<MJPlayer>();
+        if (player == null)
+        {
+            throw new NullReferenceException("MouseFire must have an MJPlayer parent");
+        }
+    }
+    
     void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 20f))
+            Hit result = weapon.Fire();
+            if (result.IsHit)
             {
-                var target = hit.collider.GetComponent<Target>();
-                if (target != null)
-                {
-                    target.RegisterHit(hit.textureCoord.x, hit.textureCoord.y);
-                }
+                player.AddScore(result.Score);
             }
         }
     }

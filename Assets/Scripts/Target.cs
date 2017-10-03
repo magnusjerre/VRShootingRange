@@ -56,12 +56,13 @@ public class Target : MonoBehaviour, IDestroyedListener
 		return (int)(Mathf.Abs(ScoreTexture.GetPixel(x, y).r - 1)* MaxScore);
 	}
 
-	public void RegisterHit(float uvX, float uvY)
+	public Hit RegisterHit(float uvX, float uvY)
 	{
 		if (isDestroyed)
 		{
-			return;
+			return Hit.Miss();
 		}
+		
 		totalDestructionScore = GetScore(uvX, uvY) + (ReceivedBonus ? BonusScore : 0);
 		for (var i = 0; i < subTargets.Length; i++)
 		{
@@ -76,6 +77,8 @@ public class Target : MonoBehaviour, IDestroyedListener
 		ShowScore();
 
 		DestroyTarget();
+		
+		return new Hit(true, totalDestructionScore);
 	}
 
 	private void ShowScore()
