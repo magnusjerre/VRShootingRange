@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
 {
-    private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particleSystem;
     private Collider collider;
 
     [SerializeField]
@@ -12,11 +12,7 @@ public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
     
     void Start()
     {
-        particleSystem = GetComponentInChildren<ParticleSystem>();
-        if (particleSystem == null)
-        {
-            throw new NullReferenceException("ExplostionTargetDestrcutor requires a child to have a ParticleSystem");
-        }
+        SetParticleSystem();
         
         collider = GetComponent<Collider>();
         MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
@@ -25,7 +21,24 @@ public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
             meshRendererToDisable.Add(thisMeshRenderer);            
         }
     }
-    
+
+    private void SetParticleSystem()
+    {
+        if (particleSystem == null)
+        {
+            particleSystem = GetComponent<ParticleSystem>();
+        }
+
+        if (particleSystem == null)
+        {
+            particleSystem = GetComponentInChildren<ParticleSystem>();
+        }
+        
+        if (particleSystem == null)
+        {
+            throw new NullReferenceException("ExplostionTargetDestrcutor requires a child to have a ParticleSystem");
+        }
+    }
     
     public void DestroyTarget()
     {
@@ -38,9 +51,11 @@ public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
     {
         foreach (var meshRenderer in meshRendererToDisable)
         {
-            meshRenderer.enabled = false;
+            if (meshRenderer != null)
+            {
+                meshRenderer.enabled = false;
+            }
         }
-        collider.enabled = false;
     }
 
     private void DestroyThisObject()

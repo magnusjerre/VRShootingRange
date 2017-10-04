@@ -41,10 +41,10 @@ public class Weapon : MonoBehaviour, IWeapon
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20f))
         {
-            var target = hit.collider.GetComponent<Target>();
-            if (target != null)
+            var targetCollider = hit.collider.GetComponent<TargetCollider>();
+            if (targetCollider != null)
             {
-                return target.RegisterHit(hit.textureCoord.x, hit.textureCoord.y);
+                return targetCollider.GetTarget().RegisterHit(hit.textureCoord.x, hit.textureCoord.y);
             }
         }
         elapsedTime = 0f;
