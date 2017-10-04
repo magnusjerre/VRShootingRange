@@ -31,6 +31,7 @@ public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
     {
         DestroyAsSubTarget();
         particleSystem.Play();
+        Invoke("DestroyThisObject", particleSystem.main.duration);
     }
 
     public void DestroyAsSubTarget()
@@ -40,5 +41,10 @@ public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
             meshRenderer.enabled = false;
         }
         collider.enabled = false;
+    }
+
+    private void DestroyThisObject()
+    {
+        Destroy(gameObject);
     }
 }
