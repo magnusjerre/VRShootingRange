@@ -22,6 +22,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 	private bool isDestroyed;
 
 	private IDestructor destructor;
+	private TargetLifecycle lifecycle;
 
 	void Awake()
 	{
@@ -31,6 +32,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 		{
 			throw new NullReferenceException("Target requires an IDestructor");
 		}
+		lifecycle = GetComponent<TargetLifecycle>();
 	}
 	
 	// Use this for initialization
@@ -127,6 +129,13 @@ public class Target : MonoBehaviour, IDestroyedListener
 			return;
 		}
 		isDestroyed = true;
-		destructor.DestroyTarget();
+		if (lifecycle != null)
+		{
+			lifecycle.Hide();
+		}
+		else
+		{
+			destructor.DestroyTarget();	
+		}
 	}
 }
