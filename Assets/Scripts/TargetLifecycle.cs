@@ -5,7 +5,8 @@ public class TargetLifecycle : MonoBehaviour
     public Transform target;
     public float animShowTime = 0.5f, animHideTime = 0.25f;
 
-    private float rotationAmount = -90f, totalRotation;
+    [SerializeField] private float rotationAmount = -90f;
+    private float totalRotation;
     private float targetRotation;
     private Vector3 rotationAxis = Vector3.right;
     private bool animateShow, animateHide;
@@ -30,7 +31,6 @@ public class TargetLifecycle : MonoBehaviour
             float diff = MinPositive(-rotationAmount / animShowTime * Time.deltaTime, totalRotation, targetRotation);
             totalRotation += diff;
             target.Rotate(rotationAxis * diff);
-            Debug.Log("Heio");
             if (totalRotation >= targetRotation)
             {
                 animateShow = false;

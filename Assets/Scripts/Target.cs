@@ -5,8 +5,10 @@ using UnityEngine;
 public class Target : MonoBehaviour, IDestroyedListener
 {
 	public Texture2D ScoreTexture;
+	[SerializeField] private Transform targetTransform;
+	private Texture2D actualTargetTexture;
 	public int MaxScore = 100;
-
+	public bool AllowNegativeScore;
 	public bool IsPlainScoreTarget;
 
 	public bool HasSubTargets, CanOutliveSubTargets;
@@ -23,6 +25,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 
 	private IDestructor destructor;
 	private TargetLifecycle lifecycle;
+	[SerializeField] private ParticleSystem hitParticles;
 
 	void Awake()
 	{
@@ -33,6 +36,15 @@ public class Target : MonoBehaviour, IDestroyedListener
 			throw new NullReferenceException("Target requires an IDestructor");
 		}
 		lifecycle = GetComponent<TargetLifecycle>();
+		if (hitParticles == null)
+			hitParticles = GetComponent<ParticleSystem>();
+		
+		if (targetTransform != null) {
+			var material = targetTransform.GetComponent<Renderer>().material;
+			if (material != null) {
+				actualTargetTexture = (Texture2D) material.mainTexture;
+			}
+		}
 	}
 	
 	// Use this for initialization
@@ -55,17 +67,22 @@ public class Target : MonoBehaviour, IDestroyedListener
 		
 		int x = (int) (posX * ScoreTexture.width);
 		int y = (int) (posY * ScoreTexture.height);
-		return (int)(Mathf.Abs(ScoreTexture.GetPixel(x, y).r - 1)* MaxScore);
+		if (AllowNegativeScore) {
+			return Mathf.RoundToInt((ScoreTexture.GetPixel(x, y).r - 0.5f) * 2 * MaxScore);
+		}
+		return Mathf.RoundToInt(Mathf.Max((ScoreTexture.GetPixel(x, y).r - 0.5f) * 2 * MaxScore, 0));
 	}
 
-	public Hit RegisterHit(float uvX, float uvY)
+	public Hit RegisterHit(RaycastHit hit)
 	{
 		if (isDestroyed)
 		{
 			return Hit.Miss();
 		}
-		
+		float uvX = hit.textureCoord.x;
+		float uvY = hit.textureCoord.y;
 		totalDestructionScore = GetScore(uvX, uvY) + (ReceivedBonus ? BonusScore : 0);
+		ShowHitParticles(hit);
 		for (var i = 0; i < subTargets.Length; i++)
 		{
 			subTargets[i].NotifyParentTargetDestroyed(this);
@@ -137,5 +154,30 @@ public class Target : MonoBehaviour, IDestroyedListener
 		{
 			destructor.DestroyTarget();	
 		}
+	}
+
+	private void ShowHitParticles(RaycastHit hit) {
+		if (hitParticles == null) {
+			return;
+		}
+
+		int x = (int) (hit.textureCoord.x * actualTargetTexture.width);
+		int y = (int) (hit.textureCoord.y * actualTargetTexture.height);
+		Color particleHitColor = actualTargetTexture.GetPixel(x, y);
+		var colorOverLifetime = hitParticles.colorOverLifetime;
+		var instanceGradient = new Gradient();
+		instanceGradient.SetKeys(
+			new GradientColorKey[]{
+				new GradientColorKey(particleHitColor, 0f),
+				new GradientColorKey(particleHitColor, 1f)
+		}, new GradientAlphaKey[]{
+				new GradientAlphaKey(1f, 0f),
+				new GradientAlphaKey(0.3f, 0.6f),
+				new GradientAlphaKey(0f, 0f)
+		});
+		colorOverLifetime.color = instanceGradient;
+		hitParticles.transform.position = hit.point;
+		hitParticles.transform.LookAt(hit.point + hit.normal * 10);
+		hitParticles.Play();
 	}
 }

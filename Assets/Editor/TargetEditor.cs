@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Target))]
+//[CustomEditor(typeof(Target))]
 public class TargetEditor : Editor
 {
 	public override void OnInspectorGUI()

@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour, IWeapon
             var targetCollider = hit.collider.GetComponent<TargetCollider>();
             if (targetCollider != null)
             {
-                return targetCollider.GetTarget().RegisterHit(hit.textureCoord.x, hit.textureCoord.y);
+                return targetCollider.GetTarget().RegisterHit(hit);
             }
         }
         elapsedTime = 0f;
