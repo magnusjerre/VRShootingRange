@@ -25,9 +25,10 @@ public class Target : MonoBehaviour, IDestroyedListener
 	private bool isDestroyed;
 
 	private IDestructor destructor;
-	private TargetLifecycle lifecycle;
 	[SerializeField] private ParticleSystem hitParticles;
 
+	public string startTriggerName, hitTriggerName;
+	private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger();
 	void Awake()
 	{
 		destroyedLiisteners = new List<IDestroyedListener>();
@@ -36,7 +37,6 @@ public class Target : MonoBehaviour, IDestroyedListener
 		{
 			throw new NullReferenceException("Target requires an IDestructor");
 		}
-		lifecycle = GetComponent<TargetLifecycle>();
 		if (hitParticles == null)
 			hitParticles = GetComponent<ParticleSystem>();
 		
@@ -44,6 +44,16 @@ public class Target : MonoBehaviour, IDestroyedListener
 			var material = targetTransform.GetComponent<Renderer>().material;
 			if (material != null) {
 				actualTargetTexture = (Texture2D) material.mainTexture;
+			}
+		}
+
+		var triggers = GetComponents<ITriggerable>();
+		for (var i = 0; i < triggers.Length; i++) {
+			var trigger = triggers[i];
+			if (trigger.Name().Equals("StartTrigger")) {
+				startTrigger = trigger;
+			} else if (trigger.Name().Equals("HitTrigger")) {
+				hitTrigger = trigger;
 			}
 		}
 	}
@@ -60,6 +70,8 @@ public class Target : MonoBehaviour, IDestroyedListener
 				bonusTarget.RegisterDestroyedListener(this);
 			}
 		}
+		
+		startTrigger.Trigger();
 	}
 
 	public int GetScore(float posX, float posY)
@@ -87,6 +99,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 		float uvY = hit.textureCoord.y;
 		totalDestructionScore = GetScore(uvX, uvY) + (ReceivedBonus ? BonusScore : 0);
 		ShowHitParticles(hit);
+		hitTrigger.Trigger();
 		for (var i = 0; i < subTargets.Length; i++)
 		{
 			subTargets[i].NotifyParentTargetDestroyed(this);
@@ -150,14 +163,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 			return;
 		}
 		isDestroyed = true;
-		if (lifecycle != null)
-		{
-			lifecycle.Hide();
-		}
-		else
-		{
-			destructor.DestroyTarget();	
-		}
+		destructor.DestroyTarget();	
 	}
 
 	private void ShowHitParticles(RaycastHit hit) {
