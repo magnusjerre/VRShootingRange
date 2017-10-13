@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SimpleTargetSpawner : MonoBehaviour
 {
+	[SerializeField] private bool UseAllChildrenAsSpawn = true;
+	[SerializeField] private bool SpawnAllForwards = false;
 
 	[SerializeField] private Transform[] spawnPoints;
 	[SerializeField] private float[] spawnTimes;
@@ -21,19 +23,26 @@ public class SimpleTargetSpawner : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		if (spawnPoints.Length == 0)
-		{
-			throw new IndexOutOfRangeException("The must be at least one spawn point");
-		}
-		
-		if (targetPrefabs.Length == 0)
-		{
-			throw new IndexOutOfRangeException("The must be at least one target prefab");
-		}
-		
-		if (spawnTimes.Length == 0)
-		{
-			throw new IndexOutOfRangeException("The must be at least one spawn time");
+		if (UseAllChildrenAsSpawn) {
+			spawnPoints = new Transform[transform.childCount];
+			for (var i = 0; i < spawnPoints.Length; i++) {
+				spawnPoints[i] = transform.GetChild(i);
+			}
+		} else {
+			if (spawnPoints.Length == 0)
+			{
+				throw new IndexOutOfRangeException("The must be at least one spawn point");
+			}
+			
+			if (targetPrefabs.Length == 0)
+			{
+				throw new IndexOutOfRangeException("The must be at least one target prefab");
+			}
+			
+			if (spawnTimes.Length == 0)
+			{
+				throw new IndexOutOfRangeException("The must be at least one spawn time");
+			}
 		}
 	}
 	
@@ -96,7 +105,11 @@ public class SimpleTargetSpawner : MonoBehaviour
 
 	private Target SpawnTarget(int targetIndex, Transform spawnPoint)
 	{
-		return Instantiate(targetPrefabs[targetIndex], spawnPoint);
+		var output = Instantiate(targetPrefabs[targetIndex], spawnPoint);
+		if (!SpawnAllForwards) {
+			output.FaceForward = random.Next(0, 2) > 0 ? true : false;
+		}
+		return output;
 	}
 	
 }

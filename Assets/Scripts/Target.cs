@@ -10,6 +10,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 	public int MaxScore = 100;
 	public bool AllowNegativeScore;
 	public bool IsPlainScoreTarget;
+	public bool FaceForward = true;
 
 	public bool HasSubTargets, CanOutliveSubTargets;
 	public int BonusScore, BonusTargetsDestroyed;
@@ -49,6 +50,9 @@ public class Target : MonoBehaviour, IDestroyedListener
 	
 	// Use this for initialization
 	void Start () {
+		if (!FaceForward) {
+			targetTransform.Rotate(targetTransform.up * 180f);
+		}
 		if (subTargets.Length > 0)
 		{
 			foreach (var bonusTarget in subTargets)
