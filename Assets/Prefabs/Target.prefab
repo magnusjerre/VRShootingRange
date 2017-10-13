@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerName: HitTrigger
   target: {fileID: 4705282079110670}
-  animHideTime: 0.25
+  animHideTime: 0.15
   rotationAmount: -90
   DestroyOnFinish: 1
 --- !u!114 &114295853969758322
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerName: StartTrigger
   target: {fileID: 4705282079110670}
-  animShowTime: 0.5
+  animShowTime: 0.3
   rotationAmount: -90
 --- !u!114 &114670188200155790
 MonoBehaviour:

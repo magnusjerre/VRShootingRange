@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4337721123900578}
   - component: {fileID: 114196411559700956}
   - component: {fileID: 114454617677171734}
+  - component: {fileID: 114599906882776646}
   m_Layer: 0
   m_Name: TargetPopup
   m_TagString: Untagged
@@ -307,6 +308,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerForCollider: {fileID: 114196411559700956}
+--- !u!114 &114599906882776646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195870615576184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7194922d1556474ba7ea465c7bcffc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerName: HitTrigger
+  target: {fileID: 0}
+  animHideTime: 0.15
+  rotationAmount: -90
+  DestroyOnFinish: 1
 --- !u!198 &198768254921157400
 ParticleSystem:
   m_ObjectHideFlags: 1
