@@ -61,7 +61,7 @@ public class Target : MonoBehaviour, IDestroyedListener
 	// Use this for initialization
 	void Start () {
 		if (!FaceForward) {
-			targetTransform.Rotate(targetTransform.up * 180f);
+			targetTransform.Rotate(Vector3.up * 180f);
 		}
 		if (subTargets.Length > 0)
 		{
