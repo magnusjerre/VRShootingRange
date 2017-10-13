@@ -724,6 +724,7 @@ MonoBehaviour:
   - 1.5
   targetPrefabs:
   - {fileID: 114196411559700956, guid: dc5d3d9f4dcde46c2adc6d6029c4da36, type: 2}
+  - {fileID: 114870047699193704, guid: 05856e48f3de047b296e9a17f12b47ff, type: 2}
   order: 0
 --- !u!114 &431448887
 MonoBehaviour:
@@ -1203,6 +1204,7 @@ MonoBehaviour:
   - 1
   targetPrefabs:
   - {fileID: 114358828295507940, guid: f8975b283f3cb466a8d319619e1cfac4, type: 2}
+  - {fileID: 114870047699193704, guid: 05856e48f3de047b296e9a17f12b47ff, type: 2}
   order: 0
 --- !u!1 &1695995464
 GameObject:
