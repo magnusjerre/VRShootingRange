@@ -39,7 +39,6 @@ public class ScoreViewer : MonoBehaviour
 
 	public void Show(int score, bool isBonus, Vector3 worldPosition)
 	{
-		Debug.Log("score in ScoreView: " + score.ToString());
 		transform.position = worldPosition;
 		scoreText.text = score.ToString();
 		if (isBonus)

@@ -70,11 +70,6 @@ public class TargetLifecycle : MonoBehaviour
     private float MinNegative(float diff, float currentSum, float targetSum)
     {
         return diff;
-//        if (diff + currentSum < targetSum)
-//        {
-//            return currentSum - targetSum;
-//        }
-//        return diff;
     }
 
     private float MinPositive(float diff, float currentSum, float targetSum)

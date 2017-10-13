@@ -13,10 +13,8 @@ public class PlaqueManager : MonoBehaviour
         var textChildren = canvas.GetComponentsInChildren<Text>();
         foreach (var textChild in textChildren)
         {
-            Debug.Log("textChildname: " + textChild.name);
             if (textChild.name.Equals("ScoreText"))
             {
-                Debug.Log("scoretext has been set");
                 scoreText = textChild;
             }
         }
