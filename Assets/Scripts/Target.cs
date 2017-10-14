@@ -202,7 +202,8 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener
 		}
     }
 
-	private void HideTarget() {
+	public void HideTarget() {
+		isDestroyed = true;
 		hitTrigger.Trigger();
 	}
 

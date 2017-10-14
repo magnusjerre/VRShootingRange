@@ -3,17 +3,10 @@ using UnityEngine;
 
 public class MouseFire : MonoBehaviour
 {
-    private IWeapon weapon;
     private MJPlayer player;
 
     void Start()
     {
-        weapon = GetComponent<IWeapon>();
-        if (weapon == null)
-        {
-            throw new NullReferenceException("MouseFire must have a weapon");
-        }
-
         player = GetComponentInParent<MJPlayer>();
         if (player == null)
         {
@@ -25,11 +18,7 @@ public class MouseFire : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Hit result = weapon.Fire();
-            if (result.IsHit)
-            {
-                player.AddScore(result.Score);
-            }
+            player.EquippedWeapon().Fire();
         }
     }
 }

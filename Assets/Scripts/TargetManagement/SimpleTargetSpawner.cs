@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SimpleTargetSpawner : MonoBehaviour
+public class SimpleTargetSpawner : MonoBehaviour, ITargetSpawner
 {
 	[SerializeField] private bool UseAllChildrenAsSpawn = true;
 	[SerializeField] private bool SpawnAllForwards = false;
@@ -15,6 +15,8 @@ public class SimpleTargetSpawner : MonoBehaviour
 	private float elapsedTime;
 
 	private int currentSpawnPointIndex, currentSpawnTimeIndex, currentTargetIndex;
+
+	private bool canSpawn;
 
 	void Awake()
 	{
@@ -49,6 +51,9 @@ public class SimpleTargetSpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (!canSpawn) {
+			return;
+		}
 		elapsedTime += Time.deltaTime;
 		if (elapsedTime >= spawnTimes[currentSpawnTimeIndex])
 		{
@@ -111,4 +116,20 @@ public class SimpleTargetSpawner : MonoBehaviour
 		}
 		return output;
 	}
+
+    public void StartSpawningProcess()
+    {
+        canSpawn = true;
+    }
+
+    public void EndSpawningProcess()
+    {
+        canSpawn = false;
+		for (var i = 0; i < spawnPoints.Length; i++) {
+			if (spawnPoints[i].childCount > 0) {
+				var childTarget = spawnPoints[i].GetChild(0).GetComponent<Target>();
+				childTarget.HideTarget();
+			}
+		}
+    }
 }

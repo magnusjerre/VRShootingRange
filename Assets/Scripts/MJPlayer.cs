@@ -7,12 +7,10 @@ public class MJPlayer : MonoBehaviour
 
     private int totalScore;
 
-    private PlaqueManager plaque;
     
     void Awake()
     {
         activeWeaponList = new List<IWeapon>();
-        plaque = FindObjectOfType<PlaqueManager>();
     }
 
     void Start()
@@ -22,13 +20,10 @@ public class MJPlayer : MonoBehaviour
         {
             activeWeaponList.Add(weapon);
         }
-        plaque.SetScore(totalScore);
     }
 
-    public void AddScore(int score)
-    {
-        totalScore += score;
-        plaque.SetScore(totalScore);
+    public IWeapon EquippedWeapon() {
+        return activeWeaponList[0];
     }
 
 }
