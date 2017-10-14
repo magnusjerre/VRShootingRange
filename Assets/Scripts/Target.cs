@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDestroyedListener
+public class Target : MonoBehaviour, IDestroyedListener, IListener
 {
 	public Texture2D ScoreTexture;
 	[SerializeField] private Transform targetTransform;
@@ -29,6 +29,8 @@ public class Target : MonoBehaviour, IDestroyedListener
 
 	public string startTriggerName, hitTriggerName;
 	private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger();
+	public float lifetime = 5f;
+
 	void Awake()
 	{
 		destroyedLiisteners = new List<IDestroyedListener>();
@@ -56,6 +58,8 @@ public class Target : MonoBehaviour, IDestroyedListener
 				hitTrigger = trigger;
 			}
 		}
+
+		startTrigger.AddListener(this);
 	}
 	
 	// Use this for initialization
@@ -190,4 +194,16 @@ public class Target : MonoBehaviour, IDestroyedListener
 		hitParticles.transform.LookAt(hit.point + hit.normal * 10);
 		hitParticles.Play();
 	}
+
+    public void Notify(object notifier)
+    {
+		if (notifier == startTrigger) {
+			Invoke("HideTarget", lifetime);
+		}
+    }
+
+	private void HideTarget() {
+		hitTrigger.Trigger();
+	}
+
 }

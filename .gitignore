@@ -7,6 +7,7 @@
 /Assets/AssetStoreTools*
 
 /.vs/
+/.vscode/
 ExportedObj/
 .consulo/
 *.csproj

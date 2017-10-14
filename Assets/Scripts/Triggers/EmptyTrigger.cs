@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class EmptyTrigger : ITriggerable
 {
+    public void AddListener(IListener listener)
+    {
+        
+    }
+
     public string Name()
     {
         return "EmptyTrigger";

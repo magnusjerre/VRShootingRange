@@ -111,5 +111,4 @@ public class SimpleTargetSpawner : MonoBehaviour
 		}
 		return output;
 	}
-	
 }
