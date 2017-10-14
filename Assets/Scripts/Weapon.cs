@@ -51,6 +51,13 @@ public class Weapon : MonoBehaviour, IWeapon
                 startButton.Click();
                 return Hit.Miss();
             }
+            if (hitListener != null) {
+                hitListener.NotifyHit(Hit.Miss(), this);
+            }
+        } else {
+            if (hitListener != null) {
+                hitListener.NotifyHit(Hit.Miss(), this);
+            }
         }
         elapsedTime = 0f;
         return Hit.Miss();

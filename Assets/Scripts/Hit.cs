@@ -1,14 +1,18 @@
 ﻿using System;
+using UnityEngine;
 
 public struct Hit
 {
     public bool IsHit;
     public int Score;
 
-    public Hit(bool isHit, int score)
+    public Vector3 HitLocation;
+
+    public Hit(bool isHit, int score, Vector3 hitLocation)
     {
         IsHit = isHit;
         Score = score;
+        HitLocation = hitLocation;
     }
 
     public override string ToString()
@@ -18,6 +22,6 @@ public struct Hit
 
     public static Hit Miss()
     {
-        return new Hit(false, 0);
+        return new Hit(false, 0, Vector3.zero);
     }
 }

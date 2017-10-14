@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour, IHitlistener {
 
     private PlaqueManager plaqueManager;
 
+    [SerializeField] private MultiplierStreak[] multiplierStreak;
+    private int streakCounter;
+
     void Awake() {
         weaponScores = new Map<IWeapon, int>();
         plaqueManager = FindObjectOfType<PlaqueManager>();
@@ -100,10 +103,16 @@ public class GameController : MonoBehaviour, IHitlistener {
     public void NotifyHit(Hit hit, IWeapon weapon)
     {
         if (hit.IsHit) {
+            streakCounter++;
             var oldScore = weaponScores.Get(weapon);
-            weaponScores.Put(weapon, oldScore + hit.Score);
+            var hitScore = HandleStreak(hit);
+            weaponScores.Put(weapon, oldScore + hitScore);
             plaqueManager.SetScore(GetTotalScore());
+            ShowScore(hitScore, hit.HitLocation, hitScore > hit.Score, hitScore - hit.Score);
+        } else {
+            streakCounter = 0;
         }
+        Debug.Log("streakCounter: " + streakCounter);
     }
 
     private int GetTotalScore() {
@@ -115,4 +124,35 @@ public class GameController : MonoBehaviour, IHitlistener {
         }
         return sum;
     }
+
+    private int HandleStreak(Hit hit) {
+        if (streakCounter == 0) {
+            return hit.Score;
+        }
+
+        for (var i = multiplierStreak.Length - 1; i >= 0; i--) {
+            var ms = multiplierStreak[i];
+            if (streakCounter >= ms.requiredStreak) {
+                return (int) (hit.Score * ms.multiplier);
+            }
+        }
+        return hit.Score;
+    }
+
+    private void ShowScore(int score, Vector3 position, bool receivedBonus, int bonus)
+	{
+		var scorePool = GameObject.FindGameObjectWithTag(Tags.SCORE_CANVAS_POOL).GetComponent<Pool>();
+		var scoreViewer = scorePool.Get<ScoreViewer>();
+        if (receivedBonus)
+        {
+            scoreViewer.Show(score, false, position + Vector3.up * 0.5f);
+            var bonusScore = scorePool.Get<ScoreViewer>();
+            bonusScore.Show(bonus, true, position);
+        }
+        else
+        {
+            scoreViewer.Show(score, false, position);
+        }
+		Debug.Log("score: " + score);
+	}
 }

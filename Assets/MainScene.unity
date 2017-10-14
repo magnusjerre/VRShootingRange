@@ -2112,8 +2112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f907a0fa41cbb444483507782bcee0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 23
+  gameTime: 55
   timeText: {fileID: 956320604}
+  multiplierStreak:
+  - requiredStreak: 2
+    multiplier: 1.25
+  - requiredStreak: 5
+    multiplier: 1.5
 --- !u!1 &1821357549
 GameObject:
   m_ObjectHideFlags: 0

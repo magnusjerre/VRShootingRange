@@ -114,31 +114,9 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener
 			destroyedLiisteners[i].NotifyDestroyed(this);
 		}
 		
-		ShowScore();
-
 		DestroyTarget();
 		
-		return new Hit(true, totalDestructionScore);
-	}
-
-	private void ShowScore()
-	{
-		var scorePool = GameObject.FindGameObjectWithTag(Tags.SCORE_CANVAS_POOL).GetComponent<Pool>();
-		var score = scorePool.Get<ScoreViewer>();
-		if (score != null)
-		{
-			if (ReceivedBonus)
-			{
-				score.Show(TotalDestructionScore - BonusScore, false, transform.position + Vector3.up * 0.5f);
-				var bonusScore = scorePool.Get<ScoreViewer>();
-				bonusScore.Show(BonusScore, true, transform.position);
-			}
-			else
-			{
-				score.Show(TotalDestructionScore, false, transform.position);
-			}
-		}
-		Debug.Log("score: " + totalDestructionScore);
+		return new Hit(totalDestructionScore > 0, totalDestructionScore, hit.point);
 	}
 
 	public void RegisterDestroyedListener(Target listener)
