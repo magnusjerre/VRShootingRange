@@ -939,6 +939,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   onlyXZDirection: 1
+--- !u!1 &653990556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 653990557}
+  - component: {fileID: 653990558}
+  m_Layer: 0
+  m_Name: ShotPool
+  m_TagString: ShotPool
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653990557
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 653990556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &653990558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 653990556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91ce3a2d8ce4c80bf4f28b6e8ba6b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1538539889014138, guid: e58e990fac8b14e8d8220d8ef8c1945d, type: 2}
+  initialSize: 10
+  pool: []
 --- !u!1 &695408288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 867621933}
   FireInterval: 1
+  MaxShotLength: 20
 --- !u!1 &947292140
 GameObject:
   m_ObjectHideFlags: 0
