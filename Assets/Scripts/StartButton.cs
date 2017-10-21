@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartButton : MonoBehaviour {
+public class StartButton : MonoBehaviour, IButton {
     private Text buttonText;
     public Text ButtonText {
         get {

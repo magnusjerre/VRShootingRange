@@ -4,11 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class TargetCollider : MonoBehaviour
 {
-    [SerializeField] private Target ownerForCollider;
+    [SerializeField] private GameObject ownerForCollider;
 
-    public Target GetTarget()
+    public T GetOwner<T>()
     {
-        return ownerForCollider;
+        return ownerForCollider.GetComponent<T>();
     }
 
     void Start()

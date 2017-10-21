@@ -5,6 +5,7 @@ public class RotateUp : MonoBehaviour, ITriggerable
     public string TriggerName;
     public Transform target;
     public float animTime = 0.5f;
+    public bool startByRotatingDownFirst = true;
 
     [SerializeField] private float rotationAmount = -90f;
     private float totalRotation, targetRotation, initialRotation;
@@ -17,7 +18,10 @@ public class RotateUp : MonoBehaviour, ITriggerable
         if (target == null) {
             target = transform;
         }
-        initialRotation = target.eulerAngles.x;
+        if (startByRotatingDownFirst)
+        {
+            initialRotation = target.eulerAngles.x;
+        }
     }
 
     void Update()
@@ -50,10 +54,21 @@ public class RotateUp : MonoBehaviour, ITriggerable
             Debug.Log("Already triggered RotateUp");
             return;
         }
-        target.Rotate(rotationAxis * rotationAmount);
-        totalRotation = rotationAmount;
-        animateShow = true;
-        targetRotation = initialRotation;
+        Debug.Log("Triggering up");
+        if (startByRotatingDownFirst)
+        {
+            target.Rotate(rotationAxis * rotationAmount);
+            totalRotation = rotationAmount;
+            animateShow = true;
+            targetRotation = initialRotation;
+        }
+        else
+        {
+            animateShow = true;
+            targetRotation = target.localEulerAngles.x - rotationAmount;
+            totalRotation = target.localEulerAngles.x;
+            Debug.LogFormat("currentRotation: {0}, targetRotation: {1}", target.localEulerAngles.x, targetRotation);
+        }
     }
 
     public string Name()

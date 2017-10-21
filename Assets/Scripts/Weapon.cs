@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour, IWeapon
         shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
         fireParticles = GetComponentInChildren<ParticleSystem>();
         elapsedTime = FireInterval;
+        GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
     }
 
     void Update()
@@ -39,24 +40,19 @@ public class Weapon : MonoBehaviour, IWeapon
         }
         
         fireParticles.Play();
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(muzzle.position, muzzle.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, MaxShotLength))
         {
             var targetCollider = hit.collider.GetComponent<TargetCollider>();
             if (targetCollider != null)
             {
-                Hit tHit = targetCollider.GetTarget().RegisterHit(hit);
+                Hit tHit = targetCollider.GetOwner<IHittable>().RegisterHit(hit);
                 if (hitListener != null) {
                     hitListener.NotifyHit(tHit, this);
                 }
                 shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
-                return tHit;;
-            }
-            var startButton = hit.collider.GetComponent<StartButton>();
-            if (startButton != null) {
-                startButton.Click();
-                return Hit.Miss();
+                return tHit;
             }
             if (hitListener != null) {
                 hitListener.NotifyHit(Hit.Miss(), this);

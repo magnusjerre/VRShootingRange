@@ -9,6 +9,11 @@ public class GameController : MonoBehaviour, IHitlistener {
     
     private bool isPlaying = false;
 
+    public bool IsPlaying
+    {
+        get { return isPlaying; }
+    }
+
     [SerializeField] private Text timeText;
 
     private ITargetSpawner[] gameTargetSpawners;
@@ -34,14 +39,6 @@ public class GameController : MonoBehaviour, IHitlistener {
         }
         startButton = GameObject.FindObjectOfType<StartButton>();
         plaqueManager.SetScore(0);
-        var allWeapons = GameObject.FindGameObjectsWithTag(Tags.WEAPON);
-        for (var i = 0; i < allWeapons.Length; i++) {
-            var weapon = allWeapons[i].GetComponent<IWeapon>();
-            if (weapon != null) {
-                weapon.AddListener(this);
-                weaponScores.Put(weapon, 0);
-            }
-        }
     }
 
     void Update() {
@@ -155,4 +152,10 @@ public class GameController : MonoBehaviour, IHitlistener {
         }
 		Debug.Log("score: " + score);
 	}
+
+    public void AddWeapon(IWeapon weapon)
+    {
+        weaponScores.Put(weapon, 0);
+        weapon.AddListener(this);
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDestroyedListener, IListener
+public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
 {
 	public Texture2D ScoreTexture;
 	[SerializeField] private Transform targetTransform;
