@@ -1,5 +1,5 @@
 ﻿public interface IWeapon
 {
-    Hit Fire();
+    WeaponFire Fire();
     void AddListener(IHitlistener listener);
 }

@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 4355064813002718}
   - component: {fileID: 114474649422506220}
   - component: {fileID: 114497740716207440}
+  - component: {fileID: 135722739915699970}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -194,7 +195,7 @@ GameObject:
   - component: {fileID: 114922123145381980}
   m_Layer: 0
   m_Name: VRPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2cfe85a3ae4100b581d7e52a67eba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationTime: 0.1
 --- !u!114 &114648114639374120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -701,6 +703,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1297596937334742}
   m_Enabled: 1
+--- !u!135 &135722739915699970
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142639081637062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198978139360640842
 ParticleSystem:
   m_ObjectHideFlags: 1

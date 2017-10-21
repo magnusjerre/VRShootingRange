@@ -32,11 +32,11 @@ public class Weapon : MonoBehaviour, IWeapon
     }
 
 
-    public Hit Fire()
+    public WeaponFire Fire()
     {
         if (!CanFire())
         {
-            return Hit.Miss();
+            return WeaponFire.NoFire();
         }
         
         fireParticles.Play();
@@ -52,7 +52,7 @@ public class Weapon : MonoBehaviour, IWeapon
                     hitListener.NotifyHit(tHit, this);
                 }
                 shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
-                return tHit;
+                return new WeaponFire(true, tHit);
             }
             if (hitListener != null) {
                 hitListener.NotifyHit(Hit.Miss(), this);
@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour, IWeapon
             shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, muzzle.position + muzzle.forward * MaxShotLength);
         }
         elapsedTime = 0f;
-        return Hit.Miss();
+        return new WeaponFire(true, Hit.Miss());
     }
 
     public void AddListener(IHitlistener listener)

@@ -6,6 +6,9 @@ public class VRFire : MonoBehaviour
     private SteamVR_TrackedObject _trackedObject;
     private SteamVR_Controller.Device device;
     private IWeapon weapon;
+    public float vibrationTime;
+    private float elapsedTime;
+    private bool vibrate;
 
     void Awake()
     {
@@ -36,7 +39,21 @@ public class VRFire : MonoBehaviour
         device = SteamVR_Controller.Input((int)_trackedObject.index);
         if (IsReleasingTrigger())
         {
-            weapon.Fire();
+            var fire = weapon.Fire();
+            if (fire.didFire)
+            {
+                vibrate = true;    
+            }
+        }
+        if (vibrate)
+        {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= vibrationTime)
+            {
+                vibrate = false;
+                elapsedTime = 0f;
+            }
+            device.TriggerHapticPulse(3999);
         }
     }
 
