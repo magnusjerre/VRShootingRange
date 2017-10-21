@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour, IWeapon
 {
     public Transform muzzle;
+    private ParticleSystem fireParticles;
 
     public float FireInterval = 1f;
     public float MaxShotLength = 20f;
@@ -20,6 +21,7 @@ public class Weapon : MonoBehaviour, IWeapon
     void Start()
     {
         shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
+        fireParticles = GetComponentInChildren<ParticleSystem>();
         elapsedTime = FireInterval;
     }
 
@@ -35,7 +37,8 @@ public class Weapon : MonoBehaviour, IWeapon
         {
             return Hit.Miss();
         }
-
+        
+        fireParticles.Play();
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, MaxShotLength))
