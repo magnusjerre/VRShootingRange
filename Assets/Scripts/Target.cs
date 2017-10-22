@@ -58,9 +58,40 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
 				hitTrigger = trigger;
 			}
 		}
+		
+		var targetCollider = GetTargetCollider();
+		targetCollider.SetOwner(gameObject);
+		SetTargetTransform(targetCollider);		
+
+		if (hitParticles == null)
+		{
+			targetTransform.GetComponent<ParticleSystem>();
+		}
 
 	}
-	
+
+	private TargetCollider GetTargetCollider()
+	{
+		var targetCollider = GetComponent<TargetCollider>();
+		if (targetCollider == null)
+		{
+			targetCollider = GetComponentInChildren<TargetCollider>();
+		}
+		if (targetCollider == null)
+		{
+			throw new NullReferenceException("Must have a targetCollider");
+		}
+		return targetCollider;
+	}
+
+	private void SetTargetTransform(TargetCollider collider)
+	{
+		if (targetTransform == null)
+		{
+			targetTransform = collider.transform;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		if (!FaceForward) {

@@ -6,6 +6,11 @@ public class TargetCollider : MonoBehaviour
 {
     [SerializeField] private GameObject ownerForCollider;
 
+    public void SetOwner(GameObject owner)
+    {
+        ownerForCollider = owner;
+    }
+
     public T GetOwner<T>()
     {
         return ownerForCollider.GetComponent<T>();
