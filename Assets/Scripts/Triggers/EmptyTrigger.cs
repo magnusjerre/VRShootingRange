@@ -16,4 +16,9 @@ public class EmptyTrigger : ITriggerable
     {
         Debug.Log("Trigger empty trigger");
     }
+
+    public void Notify(object notifier)
+    {
+        Debug.Log("Notify empty trigger");
+    }
 }

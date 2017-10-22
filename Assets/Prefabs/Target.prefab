@@ -57,6 +57,8 @@ GameObject:
   - component: {fileID: 114670188200155790}
   - component: {fileID: 114488088207944566}
   - component: {fileID: 114206615415014598}
+  - component: {fileID: 114318116990368684}
+  - component: {fileID: 114195477965952534}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -263,13 +265,26 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f58ad4beb51424695ac5a8b817d9cb77, type: 3}
---- !u!114 &114206615415014598
+--- !u!114 &114195477965952534
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729703936164454}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: destroyer
+  mListeners: []
+--- !u!114 &114206615415014598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729703936164454}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7194922d1556474ba7ea465c7bcffc0, type: 3}
   m_Name: 
@@ -291,6 +306,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerForCollider: {fileID: 1729703936164454}
+--- !u!114 &114318116990368684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729703936164454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a2fd0f447c468eaeb3e90f0309d376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: HitTrigger
+  time: 0.25
+  angles: -90
+  rotationAxis: {x: 1, y: 0, z: 0}
+  mListeners:
+  - {fileID: 114195477965952534}
 --- !u!114 &114358828295507940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +363,7 @@ MonoBehaviour:
   TriggerName: StartTrigger
   target: {fileID: 4705282079110670}
   animTime: 0.5
+  startByRotatingDownFirst: 1
   rotationAmount: -90
 --- !u!114 &114670188200155790
 MonoBehaviour:

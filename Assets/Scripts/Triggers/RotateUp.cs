@@ -82,4 +82,9 @@ public class RotateUp : MonoBehaviour, ITriggerable
             this.listener = listener;
         }
     }
+
+    public void Notify(object notifier)
+    {
+        Trigger();
+    }
 }

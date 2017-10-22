@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 
-public class RotateBy : MonoBehaviour, ITriggerable
+public class RotateBy : BaseTriggerable
 {
-    public string name;
     public float time;
     public float angles;
     public Vector3 rotationAxis;
-
-    private IListener _listener;
 
     private float totalAngles;
     private bool animate;
@@ -27,10 +24,7 @@ public class RotateBy : MonoBehaviour, ITriggerable
         if (IsFinishedRotating())
         {
             animate = false;
-            if (_listener != null)
-            {
-                _listener.Notify(this);
-            }
+            NotifyListeners();
         }
     }
 
@@ -65,7 +59,7 @@ public class RotateBy : MonoBehaviour, ITriggerable
         return diff;
     }
 
-    public void Trigger()
+    public override void Trigger()
     {
         if (animate)
         {
@@ -77,13 +71,4 @@ public class RotateBy : MonoBehaviour, ITriggerable
         totalAngles = 0f;
     }
 
-    public string Name()
-    {
-        return name;
-    }
-
-    public void AddListener(IListener listener)
-    {
-        _listener = listener;
-    }
 }

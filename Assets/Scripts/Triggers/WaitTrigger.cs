@@ -1,10 +1,6 @@
-﻿using UnityEngine;
-
-public class WaitTrigger : MonoBehaviour, ITriggerable
+﻿public class WaitTrigger : BaseTriggerable
 {
     public float waitTime;
-    [SerializeField] private string name;
-    private IListener _listener;
     private bool animate;
 
     void Start()
@@ -12,28 +8,16 @@ public class WaitTrigger : MonoBehaviour, ITriggerable
         
     }
 
-    private void NotifyListeners()
+    private void DoNotifyListeners()
     {
-        if (_listener != null)
-        {
-            _listener.Notify(this);
-        }
+        NotifyListeners();
         animate = false;
     }
     
-    public void Trigger()
+    public override void Trigger()
     {
-        Invoke("NotifyListeners", waitTime);
+        Invoke("DoNotifyListeners", waitTime);
         animate = true;
     }
 
-    public string Name()
-    {
-        return name;
-    }
-
-    public void AddListener(IListener listener)
-    {
-        _listener = listener;
-    }
 }

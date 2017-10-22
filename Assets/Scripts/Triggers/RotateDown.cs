@@ -60,4 +60,9 @@ public class RotateDown : MonoBehaviour, ITriggerable
             this.listener = listener;
         }
     }
+
+    public void Notify(object notifier)
+    {
+        Trigger();
+    }
 }

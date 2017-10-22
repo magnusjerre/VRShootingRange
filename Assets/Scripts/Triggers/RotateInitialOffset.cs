@@ -1,31 +1,18 @@
 ﻿using UnityEngine;
 
-public class RotateInitialOffset : MonoBehaviour, ITriggerable
+public class RotateInitialOffset : BaseTriggerable
 {
-
-    public string name;
     public float rotationAmount;
     public Vector3 rotationAxis;
-
-    private IListener _listener;
-
+    
     void Start()
     {
     }
     
-    public void Trigger()
+    public override void Trigger()
     {
         transform.Rotate(rotationAxis * rotationAmount);
-        _listener.Notify(this);
+        NotifyListeners();
     }
 
-    public string Name()
-    {
-        return name;
-    }
-
-    public void AddListener(IListener listener)
-    {
-        _listener = listener;
-    }
 }
