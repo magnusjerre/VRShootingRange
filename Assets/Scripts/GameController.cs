@@ -21,22 +21,19 @@ public class GameController : MonoBehaviour, IHitlistener {
 
     public PlayType playType;
     public GameObject vrPlayer, nonVRPlayer;
+    public Text scoreText;
 
     [SerializeField] private Text timeText;
 
     private ITargetSpawner[] gameTargetSpawners;
-    private StartButton startButton;
 
     private Map<IWeapon, int> weaponScores;
-
-    private PlaqueManager plaqueManager;
 
     [SerializeField] private MultiplierStreak[] multiplierStreak;
     private int streakCounter;
 
     void Awake() {
         weaponScores = new Map<IWeapon, int>();
-        plaqueManager = FindObjectOfType<PlaqueManager>();
     }
 
     void Start() {
@@ -45,8 +42,7 @@ public class GameController : MonoBehaviour, IHitlistener {
         for (var i = 0; i < gameTargetSpawners.Length; i++) {
             gameTargetSpawners[i] = spawners[i].GetComponent<ITargetSpawner>();
         }
-        startButton = GameObject.FindObjectOfType<StartButton>();
-        plaqueManager.SetScore(0);
+        scoreText.text = "0";
         if (playType == PlayType.VR)
         {
             vrPlayer.SetActive(true);
@@ -85,7 +81,6 @@ public class GameController : MonoBehaviour, IHitlistener {
     public void StartGame() {
         timeLeft = gameTime;
         isPlaying = true;
-        startButton.ButtonText.text = "Stop";
         for (var i = 0; i < gameTargetSpawners.Length; i++) {
             gameTargetSpawners[i].StartSpawningProcess();
         }
@@ -94,14 +89,13 @@ public class GameController : MonoBehaviour, IHitlistener {
             var weapon = weapons[i];
             weaponScores.Put(weapon, 0);
         }
-        plaqueManager.SetScore(GetTotalScore());
+        scoreText.text = GetTotalScore().ToString();
         timeText.text = FormatTimeLeft(timeLeft);
     }
 
     public void EndGame() {
         timeLeft = 0f;
         isPlaying = false;
-        startButton.ButtonText.text = "Start";
         foreach (ITargetSpawner spawner in gameTargetSpawners) {
             spawner.EndSpawningProcess();
         }
@@ -122,7 +116,7 @@ public class GameController : MonoBehaviour, IHitlistener {
             var oldScore = weaponScores.Get(weapon);
             var hitScore = HandleStreak(hit);
             weaponScores.Put(weapon, oldScore + hitScore);
-            plaqueManager.SetScore(GetTotalScore());
+            scoreText.text = GetTotalScore().ToString();
             ShowScore(hitScore, hit.HitLocation, hitScore > hit.Score, hitScore - hit.Score);
         } else {
             streakCounter = 0;
