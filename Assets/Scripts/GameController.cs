@@ -14,6 +14,14 @@ public class GameController : MonoBehaviour, IHitlistener {
         get { return isPlaying; }
     }
 
+    public enum PlayType
+    {
+        VR, NONVR
+    }
+
+    public PlayType playType;
+    public GameObject vrPlayer, nonVRPlayer;
+
     [SerializeField] private Text timeText;
 
     private ITargetSpawner[] gameTargetSpawners;
@@ -39,6 +47,16 @@ public class GameController : MonoBehaviour, IHitlistener {
         }
         startButton = GameObject.FindObjectOfType<StartButton>();
         plaqueManager.SetScore(0);
+        if (playType == PlayType.VR)
+        {
+            vrPlayer.SetActive(true);
+            Destroy(nonVRPlayer);
+        }
+        else
+        {
+            nonVRPlayer.SetActive(true);
+            Destroy(vrPlayer);
+        }
     }
 
     void Update() {
