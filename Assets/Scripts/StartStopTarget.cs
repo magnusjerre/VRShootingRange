@@ -5,8 +5,8 @@ public class StartStopTarget : MonoBehaviour, IListener, IHittable
     private GameController gameController;
     [SerializeField] private Transform actualTarget;
     private ParticleSystem hitParticles;
-    public string startTriggerName, hitTriggerName, initTriggerName;
-    private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger(), initTrigger = new EmptyTrigger();
+    public string startTriggerName, hitTriggerName, initTriggerName, waitTriggerName;
+    private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger(), initTrigger = new EmptyTrigger(), waitTrigger = new EmptyTrigger();
     private bool canReceiveHit;
     
     public Texture2D ScoreTexture;
@@ -40,6 +40,11 @@ public class StartStopTarget : MonoBehaviour, IListener, IHittable
             } else if (trigger.Name().Equals(initTriggerName))
             {
                 initTrigger = trigger;
+                trigger.AddListener(this);
+            }
+            else if (trigger.Name().Equals(waitTriggerName))
+            {
+                waitTrigger = trigger;
                 trigger.AddListener(this);
             }
         }
@@ -111,6 +116,10 @@ public class StartStopTarget : MonoBehaviour, IListener, IHittable
         {            
             Debug.Log("Hit trigger finished");
             FlipRotation();
+            waitTrigger.Trigger();
+        }
+        else if (notifier == waitTrigger)
+        {
             startTrigger.Trigger();
         }
     }
