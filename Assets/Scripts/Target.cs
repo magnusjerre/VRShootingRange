@@ -59,7 +59,6 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
 			}
 		}
 
-		startTrigger.AddListener(this);
 	}
 	
 	// Use this for initialization
@@ -74,7 +73,8 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
 				bonusTarget.RegisterDestroyedListener(this);
 			}
 		}
-		
+	
+		startTrigger.AddListener(this);
 		startTrigger.Trigger();
 	}
 
