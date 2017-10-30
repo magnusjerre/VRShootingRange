@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent (typeof (AudioSource))]
 public class Weapon : MonoBehaviour, IWeapon
 {
     public Transform muzzle;
@@ -12,6 +13,7 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private IHitlistener hitListener;
     private Pool shotRendererPool;
+    private AudioSource audioShot;
 
     public bool CanFire()
     {
@@ -20,6 +22,8 @@ public class Weapon : MonoBehaviour, IWeapon
 
     void Start()
     {
+        audioShot = GetComponent<AudioSource>();
+        audioShot.playOnAwake = false;
         shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
         fireParticles = GetComponentInChildren<ParticleSystem>();
         elapsedTime = FireInterval;
@@ -39,6 +43,7 @@ public class Weapon : MonoBehaviour, IWeapon
             return WeaponFire.NoFire();
         }
         
+        audioShot.Play();
         fireParticles.Play();
         Ray ray = new Ray(muzzle.position, muzzle.forward);
         RaycastHit hit;
