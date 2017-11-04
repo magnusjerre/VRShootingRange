@@ -212,6 +212,9 @@ public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
     }
 
 	public void HideTarget() {
+		if (isDestroyed) {
+			return;
+		}
 		isDestroyed = true;
 		hitTrigger.Trigger();
 	}
