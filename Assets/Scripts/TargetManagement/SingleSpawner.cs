@@ -22,6 +22,12 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
 
 	// Use this for initialization
 	void Start () {
+        for (var i = 0; i < spawnings.Length; i++) {
+            var spawnInfo = spawnings[i];
+            if (spawnInfo.nextSpawnDelay < spawnInfo.targetLifetime + 1) {
+                spawnInfo.nextSpawnDelay = spawnInfo.targetLifetime + 1;
+            }
+        }
         StartSpawningProcess();
 	}
 	

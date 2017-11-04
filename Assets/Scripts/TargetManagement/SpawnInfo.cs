@@ -12,12 +12,7 @@ namespace Jerre {
         public SpawnInfo(float targetLifetime, float nextSpawnDelay, Target target) {
             this.target = target;
             this.targetLifetime = targetLifetime;
-            if (nextSpawnDelay < targetLifetime + 1f) {
-                this.nextSpawnDelay = targetLifetime + 1f;
-                Debug.Log("Spawn delay was too low, setting it to: " + this.nextSpawnDelay);
-            } else {
-                this.nextSpawnDelay = nextSpawnDelay;
-            }
+            this.nextSpawnDelay = nextSpawnDelay;
         }
     }
 }
