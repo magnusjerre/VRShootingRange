@@ -55,10 +55,15 @@ namespace Jerre {
                 waitForInitialDelay = false;
                 waitForInitialNextSpawnDelay = true;
                 elapsedTime = 0f;
-                var target = SpawnTarget(initialSpawning.target, transform.GetChild(0));
-                NextChild();
-                target.lifetime = initialSpawning.targetLifetime;
-                ReduceRepeat();
+                if (initialSpawning.target == null) {
+                    waitForInitialNextSpawnDelay = false;
+                    isInitialPhase = false;
+                } else {
+                    var target = SpawnTarget(initialSpawning.target, transform.GetChild(0));
+                    target.lifetime = initialSpawning.targetLifetime;
+                    NextChild();
+                    ReduceRepeat();
+                }
             }
             else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay)
             {   //Initial target delay finished, spawn spawnings[0] immediately

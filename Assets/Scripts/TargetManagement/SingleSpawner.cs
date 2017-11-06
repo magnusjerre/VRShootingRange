@@ -70,9 +70,14 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
             waitForInitialDelay = false;
             waitForInitialNextSpawnDelay = true;
             elapsedTime = 0f;
-            var target = SpawnTarget(initialSpawning.target, transform);
-            target.lifetime = initialSpawning.targetLifetime;
-            ReduceRepeat();
+            if (initialSpawning.target == null) {
+                waitForInitialNextSpawnDelay = false;
+                isInitialPhase = false;
+            } else {
+                var target = SpawnTarget(initialSpawning.target, transform);
+                target.lifetime = initialSpawning.targetLifetime;
+                ReduceRepeat();
+            }
         }
         else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay)
         {   //Initial target delay finished, spawn spawnings[0] immediately
