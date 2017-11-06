@@ -9,6 +9,7 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
     [SerializeField] private float initialSpawnDelay;
     [SerializeField] private SpawnInfo initialSpawning;
     [SerializeField] private SpawnInfo[] spawnings;
+    [SerializeField] private int repeat = -1;
 	private float elapsedTime;
     private int currentIndex;
 
@@ -48,9 +49,19 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
                 var target = SpawnTarget(spawnings[currentIndex].target, transform);
                 target.lifetime = spawnings[currentIndex].targetLifetime; 
                 currentIndex = (currentIndex + 1) % spawnings.Length;
+                ReduceRepeat();
             }
         }
 	}
+
+    private void ReduceRepeat() {
+        if (repeat == -1) {
+            return;
+        }
+        if (repeat == 0 || --repeat == 0) {
+            enabled = false;
+        }
+    }
 
     private void HandleInitialPhase()
     {
@@ -61,6 +72,7 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
             elapsedTime = 0f;
             var target = SpawnTarget(initialSpawning.target, transform);
             target.lifetime = initialSpawning.targetLifetime;
+            ReduceRepeat();
         }
         else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay)
         {   //Initial target delay finished, spawn spawnings[0] immediately
@@ -71,6 +83,7 @@ public class SingleSpawner : MonoBehaviour, ITargetSpawner
             var target = SpawnTarget(spawnings[currentIndex].target, transform);
             target.lifetime = spawnings[currentIndex].targetLifetime;
             currentIndex = (currentIndex + 1) % spawnings.Length;
+            ReduceRepeat();
         }
     }
 

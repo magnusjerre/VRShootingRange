@@ -7,6 +7,7 @@ namespace Jerre {
         [SerializeField] private float initialSpawnDelay;
         [SerializeField] private SpawnInfo initialSpawning;
         [SerializeField] private SpawnInfo[] spawnings;
+        [SerializeField] private int repeat = -1;
 
         private float elapsedTime;
         private int currentSpawnIndex, currentChildIndex;
@@ -40,8 +41,9 @@ namespace Jerre {
                     elapsedTime = 0f;
                     var target = SpawnTarget(spawnings[currentSpawnIndex].target, transform.GetChild(currentChildIndex));
                     target.lifetime = spawnings[currentSpawnIndex].targetLifetime; 
-                    currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;
+                    currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;                   
                     NextChild();
+                    ReduceRepeat();
                 }
             }
         }
@@ -56,6 +58,7 @@ namespace Jerre {
                 var target = SpawnTarget(initialSpawning.target, transform.GetChild(0));
                 NextChild();
                 target.lifetime = initialSpawning.targetLifetime;
+                ReduceRepeat();
             }
             else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay)
             {   //Initial target delay finished, spawn spawnings[0] immediately
@@ -67,6 +70,16 @@ namespace Jerre {
                 target.lifetime = spawnings[currentSpawnIndex].targetLifetime;
                 currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;
                 NextChild();
+                ReduceRepeat();
+            }
+        }
+
+        private void ReduceRepeat() {
+            if (repeat == -1) {
+                return;
+            }
+            if (repeat == 0 || --repeat == 0) {
+                enabled = false;
             }
         }
 
@@ -94,6 +107,7 @@ namespace Jerre {
             canSpawn = true;
             isInitialPhase = true;
             waitForInitialDelay = true;
+            enabled = true;
         }
 
         public void EndSpawningProcess()
@@ -114,6 +128,7 @@ namespace Jerre {
             if (transform.childCount > 0) {
                 transform.GetComponentInChildren<Target>().HideTarget();
             }
+            enabled = false;
         }
     }
 }
