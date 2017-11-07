@@ -124,10 +124,7 @@ namespace Jerre {
                 }
 
                 childTarget.HideTarget();
-            }
-            if (transform.childCount > 0) {
-                transform.GetComponentInChildren<Target>().HideTarget();
-            }
+            } 
             enabled = false;
         }
     }
