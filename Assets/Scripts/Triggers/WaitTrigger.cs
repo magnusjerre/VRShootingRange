@@ -1,23 +1,26 @@
-﻿public class WaitTrigger : BaseTriggerable
+﻿namespace Jerre
 {
-    public float waitTime;
-    private bool animate;
-
-    void Start()
+    public class WaitTrigger : BaseTriggerable
     {
-        
-    }
+        public float waitTime;
+        private bool animate;
 
-    private void DoNotifyListeners()
-    {
-        NotifyListeners();
-        animate = false;
-    }
-    
-    public override void Trigger()
-    {
-        Invoke("DoNotifyListeners", waitTime);
-        animate = true;
-    }
+        void Start()
+        {
 
+        }
+
+        private void DoNotifyListeners()
+        {
+            NotifyListeners();
+            animate = false;
+        }
+
+        public override void Trigger()
+        {
+            Invoke("DoNotifyListeners", waitTime);
+            animate = true;
+        }
+
+    }
 }

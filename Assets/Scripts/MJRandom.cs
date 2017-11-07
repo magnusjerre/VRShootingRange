@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-public class MJRandom
+namespace Jerre
 {
-    public int nextSeed;
-
-    public MJRandom(int seed)
+    public class MJRandom
     {
-        nextSeed = seed;
-    }
+        public int nextSeed;
 
-    public int Next(int min, int max)
-    {
-        Random.InitState(nextSeed++);
-        return Random.Range(min, max);
+        public MJRandom(int seed)
+        {
+            nextSeed = seed;
+        }
+
+        public int Next(int min, int max)
+        {
+            Random.InitState(nextSeed++);
+            return Random.Range(min, max);
+        }
     }
 }

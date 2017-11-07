@@ -1,40 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyTrigger : ITriggerable
+namespace Jerre
 {
-    protected List<IListener> _listeners;
+    public class EmptyTrigger : ITriggerable
+    {
+        protected List<IListener> _listeners;
 
-    public EmptyTrigger()
-    {
-        _listeners = new List<IListener>();
-    }
-    
-    public void AddListener(IListener listener)
-    {
-        if (listener != null && !_listeners.Contains(listener))
+        public EmptyTrigger()
         {
-            _listeners.Add(listener);
+            _listeners = new List<IListener>();
         }
-    }
 
-    public string Name()
-    {
-        return "EmptyTrigger";
-    }
-
-    public void Trigger()
-    {
-        Debug.Log("Trigger empty trigger");
-        for (var i = 0; i < _listeners.Count; i++)
+        public void AddListener(IListener listener)
         {
-            _listeners[i].Notify(this);
+            if (listener != null && !_listeners.Contains(listener))
+            {
+                _listeners.Add(listener);
+            }
         }
-    }
 
-    public void Notify(object notifier)
-    {
-        Debug.Log("Notify empty trigger");
-        Trigger();
+        public string Name()
+        {
+            return "EmptyTrigger";
+        }
+
+        public void Trigger()
+        {
+            Debug.Log("Trigger empty trigger");
+            for (var i = 0; i < _listeners.Count; i++)
+            {
+                _listeners[i].Notify(this);
+            }
+        }
+
+        public void Notify(object notifier)
+        {
+            Debug.Log("Notify empty trigger");
+            Trigger();
+        }
     }
 }

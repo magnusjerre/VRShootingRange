@@ -1,5 +1,9 @@
-public interface ITriggerable : IListener {
-    void Trigger();
-    string Name();
-    void AddListener(IListener listener);
+namespace Jerre
+{
+    public interface ITriggerable : IListener
+    {
+        void Trigger();
+        string Name();
+        void AddListener(IListener listener);
+    }
 }

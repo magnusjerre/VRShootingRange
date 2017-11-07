@@ -1,24 +1,27 @@
 ﻿using System;
 using UnityEngine;
 
-public class MouseFire : MonoBehaviour
+namespace Jerre
 {
-    private MJPlayer player;
+    public class MouseFire : MonoBehaviour
+    {
+        private MJPlayer player;
 
-    void Start()
-    {
-        player = GetComponentInParent<MJPlayer>();
-        if (player == null)
+        void Start()
         {
-            throw new NullReferenceException("MouseFire must have an MJPlayer parent");
+            player = GetComponentInParent<MJPlayer>();
+            if (player == null)
+            {
+                throw new NullReferenceException("MouseFire must have an MJPlayer parent");
+            }
         }
-    }
-    
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+
+        void Update()
         {
-            player.EquippedWeapon().Fire();
+            if (Input.GetMouseButtonDown(0))
+            {
+                player.EquippedWeapon().Fire();
+            }
         }
     }
 }

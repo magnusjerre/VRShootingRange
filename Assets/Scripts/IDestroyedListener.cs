@@ -1,5 +1,8 @@
-﻿public interface IDestroyedListener
+﻿namespace Jerre
 {
-     void NotifyDestroyed(Target target);
-     void NotifyParentTargetDestroyed(Target parent);
+    public interface IDestroyedListener
+    {
+        void NotifyDestroyed(Target target);
+        void NotifyParentTargetDestroyed(Target parent);
+    }
 }

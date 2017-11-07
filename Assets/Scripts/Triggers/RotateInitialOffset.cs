@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class RotateInitialOffset : BaseTriggerable
+namespace Jerre
 {
-    public float rotationAmount;
-    public Vector3 rotationAxis;
-    
-    void Start()
+    public class RotateInitialOffset : BaseTriggerable
     {
-    }
-    
-    public override void Trigger()
-    {
-        transform.Rotate(rotationAxis * rotationAmount);
-        NotifyListeners();
-    }
+        public float rotationAmount;
+        public Vector3 rotationAxis;
 
+        void Start()
+        {
+        }
+
+        public override void Trigger()
+        {
+            transform.Rotate(rotationAxis * rotationAmount);
+            NotifyListeners();
+        }
+
+    }
 }

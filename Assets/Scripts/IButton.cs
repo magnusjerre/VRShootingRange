@@ -1,4 +1,7 @@
-﻿public interface IButton
+﻿namespace Jerre
 {
-    void Click();
+    public interface IButton
+    {
+        void Click();
+    }
 }

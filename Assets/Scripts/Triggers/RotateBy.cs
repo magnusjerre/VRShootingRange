@@ -1,74 +1,77 @@
 ﻿using UnityEngine;
 
-public class RotateBy : BaseTriggerable
+namespace Jerre
 {
-    public float time;
-    public float angles;
-    public Vector3 rotationAxis;
-
-    private float totalAngles;
-    private bool animate;
-
-    void Update()
+    public class RotateBy : BaseTriggerable
     {
-        if (!animate)
+        public float time;
+        public float angles;
+        public Vector3 rotationAxis;
+
+        private float totalAngles;
+        private bool animate;
+
+        void Update()
         {
-            return;
+            if (!animate)
+            {
+                return;
+            }
+
+            float speed = angles / time;
+            float diffRotation = Time.deltaTime * speed;
+            float rotationAmount = angles < 0 ? MinNegative(diffRotation, totalAngles, angles) : MinPositive(diffRotation, totalAngles, angles);
+            transform.Rotate(rotationAxis * rotationAmount);
+            totalAngles += rotationAmount;
+            if (IsFinishedRotating())
+            {
+                animate = false;
+                NotifyListeners();
+            }
         }
 
-        float speed = angles / time;
-        float diffRotation = Time.deltaTime * speed;
-        float rotationAmount = angles < 0 ? MinNegative(diffRotation, totalAngles, angles) : MinPositive(diffRotation, totalAngles, angles);
-        transform.Rotate(rotationAxis * rotationAmount);
-        totalAngles += rotationAmount;
-        if (IsFinishedRotating())
+        bool IsFinishedRotating()
         {
-            animate = false;
-            NotifyListeners();
+            if (angles < 0 && totalAngles <= angles)
+            {
+                return true;
+            }
+            if (angles >= 0 && totalAngles >= angles)
+            {
+                return true;
+            }
+            return false;
         }
-    }
 
-    bool IsFinishedRotating()
-    {
-        if (angles < 0 && totalAngles <= angles)
+        private float MinNegative(float diff, float currentSum, float targetSum)
         {
-            return true;
+            if (diff + currentSum < targetSum)
+            {
+                return targetSum - currentSum;
+            }
+            return diff;
         }
-        if (angles >= 0 && totalAngles >= angles)
-        {
-            return true;
-        }
-        return false;
-    }
 
-    private float MinNegative(float diff, float currentSum, float targetSum)
-    {
-        if (diff + currentSum < targetSum)
+        private float MinPositive(float diff, float currentSum, float targetSum)
         {
-            return targetSum - currentSum;
+            if (diff + currentSum > targetSum)
+            {
+                return targetSum - currentSum;
+            }
+            return diff;
         }
-        return diff;
-    }
-    
-    private float MinPositive(float diff, float currentSum, float targetSum)
-    {
-        if (diff + currentSum > targetSum)
-        {
-            return targetSum - currentSum;
-        }
-        return diff;
-    }
 
-    public override void Trigger()
-    {
-        if (animate)
+        public override void Trigger()
         {
-            Debug.Log("Already animating rotation");
-            return;
-        }
-        
-        animate = true;
-        totalAngles = 0f;
-    }
+            if (animate)
+            {
+                Debug.Log("Already animating rotation");
+                return;
+            }
 
+            animate = true;
+            totalAngles = 0f;
+        }
+
+    }
 }

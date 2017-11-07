@@ -1,4 +1,8 @@
-public interface ITargetSpawner {
-    void StartSpawningProcess();
-    void EndSpawningProcess();
+namespace Jerre
+{
+    public interface ITargetSpawner
+    {
+        void StartSpawningProcess();
+        void EndSpawningProcess();
+    }
 }

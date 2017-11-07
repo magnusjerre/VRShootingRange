@@ -1,29 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MJPlayer : MonoBehaviour
+namespace Jerre
 {
-    private List<IWeapon> activeWeaponList;
-
-    private int totalScore;
-
-    
-    void Awake()
+    public class MJPlayer : MonoBehaviour
     {
-        activeWeaponList = new List<IWeapon>();
-    }
+        private List<IWeapon> activeWeaponList;
 
-    void Start()
-    {
-        var weapons = GetComponentsInChildren<IWeapon>();
-        foreach (var weapon in weapons)
+        private int totalScore;
+
+
+        void Awake()
         {
-            activeWeaponList.Add(weapon);
+            activeWeaponList = new List<IWeapon>();
         }
-    }
 
-    public IWeapon EquippedWeapon() {
-        return activeWeaponList[0];
-    }
+        void Start()
+        {
+            var weapons = GetComponentsInChildren<IWeapon>();
+            foreach (var weapon in weapons)
+            {
+                activeWeaponList.Add(weapon);
+            }
+        }
 
+        public IWeapon EquippedWeapon()
+        {
+            return activeWeaponList[0];
+        }
+
+    }
 }

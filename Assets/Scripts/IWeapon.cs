@@ -1,5 +1,8 @@
-﻿public interface IWeapon
+﻿namespace Jerre
 {
-    WeaponFire Fire();
-    void AddListener(IHitlistener listener);
+    public interface IWeapon
+    {
+        WeaponFire Fire();
+        void AddListener(IHitlistener listener);
+    }
 }

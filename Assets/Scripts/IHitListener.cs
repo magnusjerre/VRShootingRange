@@ -1,3 +1,7 @@
-public interface IHitlistener {
-    void NotifyHit(Hit hit, IWeapon weapon);
+namespace Jerre
+{
+    public interface IHitlistener
+    {
+        void NotifyHit(Hit hit, IWeapon weapon);
+    }
 }

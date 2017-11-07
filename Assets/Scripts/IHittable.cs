@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IHittable
+namespace Jerre
 {
-    Hit RegisterHit(RaycastHit hit);
+    public interface IHittable
+    {
+        Hit RegisterHit(RaycastHit hit);
+    }
 }

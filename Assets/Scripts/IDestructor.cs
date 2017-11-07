@@ -1,5 +1,8 @@
-﻿public interface IDestructor
+﻿namespace Jerre
 {
-    void DestroyTarget();
-    void DestroyAsSubTarget();
+    public interface IDestructor
+    {
+        void DestroyTarget();
+        void DestroyAsSubTarget();
+    }
 }

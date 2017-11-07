@@ -2,64 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
+namespace Jerre
 {
-    [SerializeField] private ParticleSystem particleSystem;
-    private Collider collider;
-
-    [SerializeField]
-    private List<MeshRenderer> meshRendererToDisable; 
-    
-    void Start()
+    public class ExplosionTargetDestructor : MonoBehaviour, IDestructor
     {
-        SetParticleSystem();
-        
-        collider = GetComponent<Collider>();
-        MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
-        if (thisMeshRenderer != null && !meshRendererToDisable.Contains(thisMeshRenderer))
-        {
-            meshRendererToDisable.Add(thisMeshRenderer);            
-        }
-    }
+        [SerializeField] private ParticleSystem particleSystem;
+        private Collider collider;
 
-    private void SetParticleSystem()
-    {
-        if (particleSystem == null)
-        {
-            particleSystem = GetComponent<ParticleSystem>();
-        }
+        [SerializeField]
+        private List<MeshRenderer> meshRendererToDisable;
 
-        if (particleSystem == null)
+        void Start()
         {
-            particleSystem = GetComponentInChildren<ParticleSystem>();
-        }
-        
-        if (particleSystem == null)
-        {
-            throw new NullReferenceException("ExplostionTargetDestrcutor requires a child to have a ParticleSystem");
-        }
-    }
-    
-    public void DestroyTarget()
-    {
-        DestroyAsSubTarget();
-        particleSystem.Play();
-        Invoke("DestroyThisObject", particleSystem.main.duration);
-    }
+            SetParticleSystem();
 
-    public void DestroyAsSubTarget()
-    {
-        foreach (var meshRenderer in meshRendererToDisable)
-        {
-            if (meshRenderer != null)
+            collider = GetComponent<Collider>();
+            MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
+            if (thisMeshRenderer != null && !meshRendererToDisable.Contains(thisMeshRenderer))
             {
-                meshRenderer.enabled = false;
+                meshRendererToDisable.Add(thisMeshRenderer);
             }
         }
-    }
 
-    private void DestroyThisObject()
-    {
-        Destroy(gameObject);
+        private void SetParticleSystem()
+        {
+            if (particleSystem == null)
+            {
+                particleSystem = GetComponent<ParticleSystem>();
+            }
+
+            if (particleSystem == null)
+            {
+                particleSystem = GetComponentInChildren<ParticleSystem>();
+            }
+
+            if (particleSystem == null)
+            {
+                throw new NullReferenceException("ExplostionTargetDestrcutor requires a child to have a ParticleSystem");
+            }
+        }
+
+        public void DestroyTarget()
+        {
+            DestroyAsSubTarget();
+            particleSystem.Play();
+            Invoke("DestroyThisObject", particleSystem.main.duration);
+        }
+
+        public void DestroyAsSubTarget()
+        {
+            foreach (var meshRenderer in meshRendererToDisable)
+            {
+                if (meshRenderer != null)
+                {
+                    meshRenderer.enabled = false;
+                }
+            }
+        }
+
+        private void DestroyThisObject()
+        {
+            Destroy(gameObject);
+        }
     }
 }

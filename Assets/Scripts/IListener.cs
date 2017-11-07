@@ -1,5 +1,9 @@
 using UnityEngine;
 
-public interface IListener {
-    void Notify(object notifier);
+namespace Jerre
+{
+    public interface IListener
+    {
+        void Notify(object notifier);
+    }
 }

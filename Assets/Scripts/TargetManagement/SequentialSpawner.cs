@@ -20,11 +20,6 @@ namespace Jerre {
             random = new MJRandom(1);
         }
 
-        // Use this for initialization
-        void Start () {
-            StartSpawningProcess();
-        }
-        
         void Update ()
         {
             if (!canSpawn) {

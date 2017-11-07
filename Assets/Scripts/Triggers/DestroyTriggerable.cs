@@ -1,14 +1,17 @@
-﻿public class DestroyTriggerable : BaseTriggerable
+﻿namespace Jerre
 {
-    void Start()
+    public class DestroyTriggerable : BaseTriggerable
     {
-        
-    }
-    
-    public override void Trigger()
-    {
-        NotifyListeners();
-        Destroy(gameObject);
-    }
+        void Start()
+        {
 
+        }
+
+        public override void Trigger()
+        {
+            NotifyListeners();
+            Destroy(gameObject);
+        }
+
+    }
 }

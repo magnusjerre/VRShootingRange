@@ -2,45 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool : MonoBehaviour
+namespace Jerre
 {
-    public GameObject prefab;
-    public int initialSize = 10;
-
-    public List<GameObject> pool;
-
-    void Awake()
+    public class Pool : MonoBehaviour
     {
-        pool = new List<GameObject>();
-        for (var i = 0; i < initialSize; i++)
-        {
-            var instance = Instantiate(prefab);
-            instance.SetActive(false);
-            pool.Add(instance);
-        }
-    }
+        public GameObject prefab;
+        public int initialSize = 10;
 
-    public T Get<T>()
-    {
-        for (var i = 0; i < pool.Count; i++)
+        public List<GameObject> pool;
+
+        void Awake()
         {
-            if (!pool[i].activeSelf)
+            pool = new List<GameObject>();
+            for (var i = 0; i < initialSize; i++)
             {
-                var result = pool[i].GetComponent<T>();
-                pool[i].SetActive(true);
-                return result;
+                var instance = Instantiate(prefab);
+                instance.SetActive(false);
+                pool.Add(instance);
             }
         }
 
-        var existingType = pool[0].GetComponent<T>();
-        if (existingType == null)
+        public T Get<T>()
         {
-            throw new NullReferenceException("Trying to add an illegal type to the pool: " + typeof(T));
+            for (var i = 0; i < pool.Count; i++)
+            {
+                if (!pool[i].activeSelf)
+                {
+                    var result = pool[i].GetComponent<T>();
+                    pool[i].SetActive(true);
+                    return result;
+                }
+            }
+
+            var existingType = pool[0].GetComponent<T>();
+            if (existingType == null)
+            {
+                throw new NullReferenceException("Trying to add an illegal type to the pool: " + typeof(T));
+            }
+
+            var instance = Instantiate(prefab);
+            pool.Add(instance);
+            return instance.GetComponent<T>();
         }
-        
-        var instance = Instantiate(prefab);
-        pool.Add(instance);
-        return instance.GetComponent<T>();
+
     }
-    
 }

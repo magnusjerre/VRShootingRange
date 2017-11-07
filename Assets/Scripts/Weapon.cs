@@ -1,82 +1,91 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent (typeof (AudioSource))]
-public class Weapon : MonoBehaviour, IWeapon
+namespace Jerre
 {
-    public Transform muzzle;
-    private ParticleSystem fireParticles;
-
-    public float FireInterval = 1f;
-    public float MaxShotLength = 20f;
-    private float elapsedTime;
-
-    private IHitlistener hitListener;
-    private Pool shotRendererPool;
-    private AudioSource audioShot;
-
-    public bool CanFire()
+    [RequireComponent(typeof(AudioSource))]
+    public class Weapon : MonoBehaviour, IWeapon
     {
-        return elapsedTime >= FireInterval;
-    }
+        public Transform muzzle;
+        private ParticleSystem fireParticles;
 
-    void Start()
-    {
-        audioShot = GetComponent<AudioSource>();
-        audioShot.playOnAwake = false;
-        shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
-        fireParticles = GetComponentInChildren<ParticleSystem>();
-        elapsedTime = FireInterval;
-        GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
-    }
+        public float FireInterval = 1f;
+        public float MaxShotLength = 20f;
+        private float elapsedTime;
 
-    void Update()
-    {
-        elapsedTime += Time.deltaTime;
-    }
+        private IHitlistener hitListener;
+        private Pool shotRendererPool;
+        private AudioSource audioShot;
 
-
-    public WeaponFire Fire()
-    {
-        if (!CanFire())
+        public bool CanFire()
         {
-            return WeaponFire.NoFire();
+            return elapsedTime >= FireInterval;
         }
-        
-        audioShot.Play();
-        fireParticles.Play();
-        Ray ray = new Ray(muzzle.position, muzzle.forward);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, MaxShotLength))
+
+        void Start()
         {
-            var targetCollider = hit.collider.GetComponent<TargetCollider>();
-            if (targetCollider != null)
+            audioShot = GetComponent<AudioSource>();
+            audioShot.playOnAwake = false;
+            shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
+            fireParticles = GetComponentInChildren<ParticleSystem>();
+            elapsedTime = FireInterval;
+            GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
+        }
+
+        void Update()
+        {
+            elapsedTime += Time.deltaTime;
+        }
+
+
+        public WeaponFire Fire()
+        {
+            if (!CanFire())
             {
-                Hit tHit = targetCollider.GetOwner<IHittable>().RegisterHit(hit);
-                if (hitListener != null) {
-                    hitListener.NotifyHit(tHit, this);
-                }
-                shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
-                return new WeaponFire(true, tHit);
+                return WeaponFire.NoFire();
             }
-            if (hitListener != null) {
-                hitListener.NotifyHit(Hit.Miss(), this);
-                shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
-            }
-        } else {
-            if (hitListener != null) {
-                hitListener.NotifyHit(Hit.Miss(), this);
-            }
-            shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, muzzle.position + muzzle.forward * MaxShotLength);
-        }
-        elapsedTime = 0f;
-        return new WeaponFire(true, Hit.Miss());
-    }
 
-    public void AddListener(IHitlistener listener)
-    {
-        if (this.hitListener == null) {
-            this.hitListener = listener;
+            audioShot.Play();
+            fireParticles.Play();
+            Ray ray = new Ray(muzzle.position, muzzle.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, MaxShotLength))
+            {
+                var targetCollider = hit.collider.GetComponent<TargetCollider>();
+                if (targetCollider != null)
+                {
+                    Hit tHit = targetCollider.GetOwner<IHittable>().RegisterHit(hit);
+                    if (hitListener != null)
+                    {
+                        hitListener.NotifyHit(tHit, this);
+                    }
+                    shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
+                    return new WeaponFire(true, tHit);
+                }
+                if (hitListener != null)
+                {
+                    hitListener.NotifyHit(Hit.Miss(), this);
+                    shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
+                }
+            }
+            else
+            {
+                if (hitListener != null)
+                {
+                    hitListener.NotifyHit(Hit.Miss(), this);
+                }
+                shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, muzzle.position + muzzle.forward * MaxShotLength);
+            }
+            elapsedTime = 0f;
+            return new WeaponFire(true, Hit.Miss());
+        }
+
+        public void AddListener(IHitlistener listener)
+        {
+            if (this.hitListener == null)
+            {
+                this.hitListener = listener;
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿public enum Order
+﻿namespace Jerre
 {
-     ROUND_ROBIN, RANDOM  
+    public enum Order
+    {
+        ROUND_ROBIN, RANDOM
+    }
 }
