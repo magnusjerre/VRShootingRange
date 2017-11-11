@@ -411,6 +411,7 @@ MonoBehaviour:
   hitTriggerName: 
   lifetime: 5
   bullseyeHitSound: {fileID: 8300000, guid: 8c8ee018e7623b2498995d4a8db4f9c3, type: 3}
+  missSound: {fileID: 8300000, guid: 89af1e1dd7c5e6c4eb3fc146bd6dab5f, type: 3}
 --- !u!114 &114754636515580598
 MonoBehaviour:
   m_ObjectHideFlags: 1

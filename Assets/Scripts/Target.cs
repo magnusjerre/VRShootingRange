@@ -34,6 +34,7 @@ namespace Jerre
         public float lifetime = 5f;
 
         [SerializeField] private AudioClip bullseyeHitSound;
+        [SerializeField] private AudioClip missSound;
         private Pool audioSourcePool;
 
         void Awake()
@@ -155,6 +156,9 @@ namespace Jerre
             {
                 PlaySound(bullseyeHitSound);
             }
+            if (missSound != null && score == 0) {
+                PlaySound(missSound);
+            }
             for (var i = 0; i < subTargets.Length; i++)
             {
                 subTargets[i].NotifyParentTargetDestroyed(this);
@@ -172,8 +176,6 @@ namespace Jerre
         private void PlaySound(AudioClip soundClip)
         {
             var audioSource = audioSourcePool.Get<AudioSource>();
-            audioSource.transform.position = targetTransform.position;
-            audioSource.transform.rotation = targetTransform.rotation;
             audioSource.playOnAwake = false;
             audioSource.clip = soundClip;
             audioSource.Play();
