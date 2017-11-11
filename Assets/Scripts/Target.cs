@@ -33,6 +33,9 @@ namespace Jerre
         private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger();
         public float lifetime = 5f;
 
+        [SerializeField] private AudioClip bullseyeHitSound;
+        private Pool audioSourcePool;
+
         void Awake()
         {
             destroyedLiisteners = new List<IDestroyedListener>();
@@ -76,6 +79,7 @@ namespace Jerre
                 targetTransform.GetComponent<ParticleSystem>();
             }
 
+            audioSourcePool = GameObject.FindGameObjectWithTag(Tags.AUDIO_SOURCE_POOL).GetComponent<Pool>();
         }
 
         private TargetCollider GetTargetCollider()
@@ -143,9 +147,14 @@ namespace Jerre
             }
             float uvX = hit.textureCoord.x;
             float uvY = hit.textureCoord.y;
-            totalDestructionScore = GetScore(uvX, uvY) + (ReceivedBonus ? BonusScore : 0);
+            var score = GetScore(uvX, uvY);
+            totalDestructionScore = score + (ReceivedBonus ? BonusScore : 0);
             ShowHitParticles(hit);
             hitTrigger.Trigger();
+            if (bullseyeHitSound != null && score == MaxScore)
+            {
+                PlaySound(bullseyeHitSound);
+            }
             for (var i = 0; i < subTargets.Length; i++)
             {
                 subTargets[i].NotifyParentTargetDestroyed(this);
@@ -155,10 +164,25 @@ namespace Jerre
             {
                 destroyedLiisteners[i].NotifyDestroyed(this);
             }
-
             DestroyTarget();
 
             return new Hit(totalDestructionScore > 0, totalDestructionScore, hit.point);
+        }
+
+        private void PlaySound(AudioClip soundClip)
+        {
+            var audioSource = audioSourcePool.Get<AudioSource>();
+            audioSource.transform.position = targetTransform.position;
+            audioSource.transform.rotation = targetTransform.rotation;
+            audioSource.playOnAwake = false;
+            audioSource.clip = soundClip;
+            audioSource.Play();
+            var waitDisabler = audioSource.GetComponent<WaitDisabler>();
+            if (waitDisabler != null)
+            {
+                waitDisabler.waitTime = audioSource.clip.length;
+                waitDisabler.Trigger();
+            }
         }
 
         public void RegisterDestroyedListener(Target listener)

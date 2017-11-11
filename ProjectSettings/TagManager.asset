@@ -8,6 +8,7 @@ TagManager:
   - GameTargetSpawner
   - Weapon
   - ShotPool
+  - AudioSourcePool
   layers:
   - Default
   - TransparentFX
