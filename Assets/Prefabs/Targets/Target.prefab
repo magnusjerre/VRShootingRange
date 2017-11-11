@@ -59,8 +59,11 @@ GameObject:
   - component: {fileID: 114060346301027238}
   - component: {fileID: 114754636515580598}
   - component: {fileID: 114232061756656446}
+  - component: {fileID: 114921549895960160}
   - component: {fileID: 114163855068400566}
   - component: {fileID: 114384069569946494}
+  - component: {fileID: 114392961789901838}
+  - component: {fileID: 114021031541153570}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -294,6 +297,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f58ad4beb51424695ac5a8b817d9cb77, type: 3}
+--- !u!114 &114021031541153570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090212977994136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa88c09ea235f0b4ea97895516a7c8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: HideTargetSound
+  mListeners: []
+  clip: {fileID: 8300000, guid: 9f35d47b27eb8c04eb844c1203fc74d7, type: 3}
 --- !u!114 &114060346301027238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a2fd0f447c468eaeb3e90f0309d376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: HitTrigger
+  name: rotatedown
   mListeners:
   - {fileID: 114384069569946494}
   time: 0.25
@@ -353,6 +370,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: destroyer
   mListeners: []
+--- !u!114 &114392961789901838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090212977994136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa88c09ea235f0b4ea97895516a7c8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: ShowTargetSound
+  mListeners: []
+  clip: {fileID: 8300000, guid: e092d8b61ef859f488c1a2161f83fda9, type: 3}
 --- !u!114 &114475273017189568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,6 +424,7 @@ MonoBehaviour:
   name: StartTrigger
   mListeners:
   - {fileID: 114232061756656446}
+  - {fileID: 114392961789901838}
   rotationAmount: -90
   rotationAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &114920179498736674
@@ -407,6 +439,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerForCollider: {fileID: 0}
+--- !u!114 &114921549895960160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090212977994136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: HitTrigger
+  mListeners:
+  - {fileID: 114021031541153570}
+  - {fileID: 114163855068400566}
+  waitTime: 0
 --- !u!198 &198626186308098754
 ParticleSystem:
   m_ObjectHideFlags: 1
