@@ -38,11 +38,11 @@ namespace Jerre
         }
 
 
-        public WeaponFire Fire()
+        public bool Fire()
         {
             if (!CanFire())
             {
-                return WeaponFire.NoFire();
+                return false;
             }
 
             audioShot.Play();
@@ -60,7 +60,7 @@ namespace Jerre
                         hitListener.NotifyHit(tHit, this);
                     }
                     shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
-                    return new WeaponFire(true, tHit);
+                    return true;
                 }
                 if (hitListener != null)
                 {
@@ -77,7 +77,7 @@ namespace Jerre
                 shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, muzzle.position + muzzle.forward * MaxShotLength);
             }
             elapsedTime = 0f;
-            return new WeaponFire(true, Hit.Miss());
+            return true;
         }
 
         public void AddListener(IHitlistener listener)

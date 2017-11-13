@@ -41,8 +41,7 @@ namespace Jerre
             device = SteamVR_Controller.Input((int)_trackedObject.index);
             if (IsReleasingTrigger())
             {
-                var fire = weapon.Fire();
-                if (fire.didFire)
+                if (weapon.Fire())
                 {
                     vibrate = true;
                 }
