@@ -19,8 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4869365581069426}
-  - component: {fileID: 114556007815802146}
-  - component: {fileID: 114321940794684710}
   - component: {fileID: 114412229542960532}
   - component: {fileID: 114360049881908190}
   - component: {fileID: 114007240128577354}
@@ -233,9 +231,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 0
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f58ad4beb51424695ac5a8b817d9cb77, type: 3}
 --- !u!114 &114007240128577354
@@ -250,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: hit
+  mListeners: []
   time: 0.1
   angles: -90
   rotationAxis: {x: 1, y: 0, z: 0}
@@ -264,8 +263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.1
   name: wait
+  mListeners: []
+  waitTime: 0.1
 --- !u!114 &114117313299600456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,25 +278,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: start
+  mListeners: []
   time: 0.25
   angles: 90
   rotationAxis: {x: 1, y: 0, z: 0}
---- !u!114 &114321940794684710
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1249378404680592}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7194922d1556474ba7ea465c7bcffc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerName: hit
-  target: {fileID: 4869365581069426}
-  animTime: 0.25
-  rotationAmount: -90
-  DestroyOnFinish: 0
 --- !u!114 &114360049881908190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,22 +312,6 @@ MonoBehaviour:
   initTriggerName: init
   waitTriggerName: wait
   ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
---- !u!114 &114556007815802146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1249378404680592}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4aa42a9e7ed44888d0b489a362b46e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerName: start
-  target: {fileID: 4869365581069426}
-  animTime: 0.25
-  startByRotatingDownFirst: 1
-  rotationAmount: -90
 --- !u!114 &114707699830804286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: init
+  mListeners: []
   rotationAmount: -90
   rotationAxis: {x: 1, y: 0, z: 0}
 --- !u!198 &198477959832765958
@@ -882,11 +852,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -1647,6 +1617,47 @@ ParticleSystem:
         - serializedVersion: 2
           time: 1
           value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    speedModifier:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3050,6 +3061,7 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
+    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -3094,12 +3106,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
+    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
