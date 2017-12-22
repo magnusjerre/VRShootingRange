@@ -2,7 +2,7 @@
 {
     public interface IWeapon
     {
-        WeaponFire Fire();
+        bool Fire();
         void AddListener(IHitlistener listener);
     }
 }
