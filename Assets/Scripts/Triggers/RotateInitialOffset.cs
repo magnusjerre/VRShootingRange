@@ -6,6 +6,15 @@ namespace Jerre
     {
         public float rotationAmount;
         public Vector3 rotationAxis;
+		public bool rotateOnAwake;
+
+		void Awake() 
+		{
+			base.Awake ();
+			if (rotateOnAwake) {
+				transform.Rotate (rotationAxis * rotationAmount);
+			}
+		}
 
         void Start()
         {

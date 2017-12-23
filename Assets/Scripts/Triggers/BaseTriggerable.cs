@@ -9,7 +9,7 @@ namespace Jerre
         [SerializeField] private List<MonoBehaviour> mListeners;
         protected List<IListener> _listeners;
 
-        void Awake()
+        protected void Awake()
         {
             _listeners = new List<IListener>();
             for (var i = 0; i < mListeners.Count; i++)
