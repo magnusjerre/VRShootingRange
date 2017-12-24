@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114726917213016558}
   - component: {fileID: 114688148809183070}
   - component: {fileID: 114164060826750236}
+  - component: {fileID: 114840087498744866}
+  - component: {fileID: 114825969413706796}
   m_Layer: 0
   m_Name: TargetWaving
   m_TagString: Untagged
@@ -290,9 +292,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 0
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f58ad4beb51424695ac5a8b817d9cb77, type: 3}
 --- !u!114 &114003188563529998
@@ -311,6 +313,7 @@ MonoBehaviour:
   - {fileID: 114726917213016558}
   rotationAmount: -90
   rotationAxis: {x: 1, y: 0, z: 0}
+  rotateOnAwake: 0
 --- !u!114 &114164060826750236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 4592541886957126}
   MaxScore: 100
   AllowNegativeScore: 0
   IsPlainScoreTarget: 0
@@ -350,6 +353,8 @@ MonoBehaviour:
   startTriggerName: 
   hitTriggerName: 
   lifetime: 5
+  bullseyeHitSound: {fileID: 0}
+  missSound: {fileID: 0}
 --- !u!114 &114500701362145178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
+  particleSystem: {fileID: 198078702295577644}
   meshRendererToDisable: []
 --- !u!114 &114533117165555870
 MonoBehaviour:
@@ -430,6 +435,38 @@ MonoBehaviour:
   time: 0.5
   angles: 90
   rotationAxis: {x: 1, y: 0, z: 0}
+--- !u!114 &114825969413706796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1170051416649482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbe19d368bf24cb09d1c601d20f1d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: HitTrigger
+  mListeners:
+  - {fileID: 114840087498744866}
+  renderersToHide:
+  - {fileID: 23926449005537628}
+  - {fileID: 23318916346334966}
+--- !u!114 &114840087498744866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1170051416649482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: HitTrigger
+  mListeners:
+  - {fileID: 114164060826750236}
+  waitTime: 1.5
 --- !u!198 &198078702295577644
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -490,14 +527,14 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1620442375
+  randomSeed: -813919560
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -642,7 +679,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -943,11 +980,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -1135,8 +1172,8 @@ ParticleSystem:
       time: 0
       countCurve:
         serializedVersion: 2
-        minMaxState: 3
-        scalar: 60
+        minMaxState: 0
+        scalar: 80
         minScalar: 40
         maxCurve:
           serializedVersion: 2
@@ -1708,6 +1745,47 @@ ParticleSystem:
         - serializedVersion: 2
           time: 1
           value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    speedModifier:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3111,6 +3189,7 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
+    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -3155,12 +3234,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
+    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0

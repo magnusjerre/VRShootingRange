@@ -34,8 +34,10 @@ namespace Jerre {
             else {
                 if (elapsedTime >= spawnings[currentSpawnIndex].nextSpawnDelay) {
                     elapsedTime = 0f;
-                    var target = SpawnTarget(spawnings[currentSpawnIndex].target, transform.GetChild(currentChildIndex));
-                    target.lifetime = spawnings[currentSpawnIndex].targetLifetime; 
+					if (spawnings [currentSpawnIndex].target != null) {
+						var target = SpawnTarget (spawnings [currentSpawnIndex].target, transform.GetChild (currentChildIndex));
+						target.lifetime = spawnings [currentSpawnIndex].targetLifetime;
+					}
                     currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;                   
                     NextChild();
                     ReduceRepeat();

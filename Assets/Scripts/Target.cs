@@ -222,7 +222,6 @@ namespace Jerre
             {
                 return;
             }
-
             int x = (int)(hit.textureCoord.x * actualTargetTexture.width);
             int y = (int)(hit.textureCoord.y * actualTargetTexture.height);
             Color particleHitColor = actualTargetTexture.GetPixel(x, y);
@@ -245,7 +244,7 @@ namespace Jerre
 
         public void Notify(object notifier)
         {
-            if (notifier == startTrigger)
+			if (notifier == startTrigger && lifetime != -1)
             {
                 Invoke("HideTarget", lifetime);
             }
