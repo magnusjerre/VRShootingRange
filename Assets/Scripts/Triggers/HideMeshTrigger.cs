@@ -6,8 +6,6 @@ namespace Jerre {
 	public class HideMeshTrigger : BaseTriggerable
 	{
 
-		public MeshRenderer[] renderersToHide;
-
 		// Use this for initialization
 		void Start ()
 		{
@@ -16,9 +14,11 @@ namespace Jerre {
 		
 		public override void Trigger() 
 		{
-			for (var i = 0; i < renderersToHide.Length; i++) {
-				renderersToHide [i].enabled = false;
-				var collider = renderersToHide [i].GetComponent<Collider> ();
+			var renderers = GetComponentsInChildren<MeshRenderer> ();
+			for (var i = 0; i < renderers.Length; i++) {
+				var renderer = renderers[i];
+				renderer.enabled = false;
+				var collider = renderer.GetComponent<Collider> ();
 				if (collider != null) {
 					collider.enabled = false;
 				}

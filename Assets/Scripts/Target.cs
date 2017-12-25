@@ -4,23 +4,30 @@ using UnityEngine;
 
 namespace Jerre
 {
-    public class Target : MonoBehaviour, IListener, IHittable
+    public class Target : MonoBehaviour, IHittable
     {
-        public Texture2D ScoreTexture;
-        [SerializeField] private Transform targetTransform;
-        public int MaxScore = 100;
+        [SerializeField] private Texture2D ScoreTexture;
+		[SerializeField] private Transform triggerObjectPrefab;
+		[SerializeField] private Transform offsetObjectPrefab;
+		[SerializeField] private Transform targetModelPrefab;
+		[SerializeField] private ParticleSystem hitParticlesPrefab;
+        
+		private Transform offsetInstance;
+		private Transform totalOffset;
+		private Transform targetModelInstance;
+		private Transform triggerObjectInstance;
+		private Texture2D targetColorTexture;
+        
+		public int MaxScore = 100;
         public bool AllowNegativeScore;
         public bool IsPlainScoreTarget;
         public bool FaceForward = true;
 
         private int totalDestructionScore;
         public int TotalDestructionScore { get { return totalDestructionScore; } }
-
         private bool isDestroyed;
 
-		[SerializeField] private ParticleSystem hitParticlesPrefab;
-
-		[SerializeField] private BaseTriggerable initTrigger, hitTrigger;
+		private ITriggerable initTrigger, hideTrigger;
         public float lifetime = 5f;
 
         [SerializeField] private AudioClip bullseyeHitSound;
@@ -29,41 +36,60 @@ namespace Jerre
 
         void Awake()
         {
-            var targetCollider = GetTargetCollider();
-            targetCollider.SetOwner(gameObject);
-            SetTargetTransform(targetCollider);
+			triggerObjectInstance = Instantiate (triggerObjectPrefab, transform);
+			offsetInstance = Instantiate (offsetObjectPrefab, triggerObjectInstance).transform;
+			offsetInstance.parent = triggerObjectInstance;
+			totalOffset = offsetInstance;
+			if (offsetInstance.childCount > 0) {
+				totalOffset = offsetInstance.GetChild (0);
+			}
+			targetModelInstance = Instantiate (targetModelPrefab, triggerObjectInstance);
+			targetModelInstance.position = totalOffset.position;
+			targetModelInstance.rotation = totalOffset.rotation;
+			SetColliderOwner (targetModelInstance);
+			targetColorTexture = (Texture2D) targetModelInstance.GetChild(0).GetComponent<Renderer>().sharedMaterial.mainTexture;
+			SetInitAndHitTriggers ();
 
             audioSourcePool = GameObject.FindGameObjectWithTag(Tags.AUDIO_SOURCE_POOL).GetComponent<Pool>();
         }
 
-        private TargetCollider GetTargetCollider()
+		private void SetColliderOwner(Transform targetModel)
         {
-            var targetCollider = GetComponent<TargetCollider>();
+            var targetCollider = targetModel.GetComponent<TargetCollider>();
             if (targetCollider == null)
             {
-                targetCollider = GetComponentInChildren<TargetCollider>();
+                targetCollider = targetModel.GetComponentInChildren<TargetCollider>();
             }
             if (targetCollider == null)
             {
                 throw new NullReferenceException("Must have a targetCollider");
             }
-            return targetCollider;
+			targetCollider.SetOwner (gameObject);
         }
 
-        private void SetTargetTransform(TargetCollider collider)
-        {
-            if (targetTransform == null)
-            {
-                targetTransform = collider.transform;
-            }
-        }
+		private void SetInitAndHitTriggers() {
+			var triggers = triggerObjectInstance.GetComponents<ITriggerable>();
+			var count = 0;
+			foreach (var trigger in triggers) {
+				if (trigger.Name ().Equals ("init")) {
+					initTrigger = trigger;
+					count++;
+				} else if (trigger.Name ().Equals ("hide")) {
+					hideTrigger = trigger;
+					count++;
+				}
+				if (count == 2) {
+					break;
+				}
+			}
+		}
 
         // Use this for initialization
         void Start()
         {
             if (!FaceForward)
             {
-                targetTransform.Rotate(Vector3.up * 180f);
+				targetModelInstance.Rotate(Vector3.up * 180f);
             }
 
             initTrigger.Trigger();
@@ -100,7 +126,7 @@ namespace Jerre
             var score = GetScore(uvX, uvY);
 			totalDestructionScore = score;
             ShowHitParticles(hit);
-            hitTrigger.Trigger();
+            hideTrigger.Trigger();
             if (bullseyeHitSound != null && score == MaxScore)
             {
                 PlaySound(bullseyeHitSound);
@@ -128,15 +154,14 @@ namespace Jerre
 
         private void ShowHitParticles(RaycastHit hit)
         {
-			if (hitParticlesPrefab == null || targetTransform == null)
+			if (hitParticlesPrefab == null || targetModelInstance == null)
             {
                 return;
             }
-			var targetColorTexture = (Texture2D) targetTransform.GetComponent<Renderer>().sharedMaterial.mainTexture;
 			int x = (int)(hit.textureCoord.x * targetColorTexture.width);
 			int y = (int)(hit.textureCoord.y * targetColorTexture.height);
 			Color particleHitColor = targetColorTexture.GetPixel(x, y);
-			var particles = Instantiate (hitParticlesPrefab, targetTransform);
+			var particles = Instantiate (hitParticlesPrefab, triggerObjectInstance);
 			var particleColors = particles.colorOverLifetime;
             var instanceGradient = new Gradient();
             instanceGradient.SetKeys(
@@ -149,14 +174,9 @@ namespace Jerre
                 new GradientAlphaKey(0f, 0f)
             });
             particleColors.color = instanceGradient;
-			particles.transform.parent = targetTransform;
             particles.transform.position = hit.point;
             particles.transform.LookAt(hit.point + hit.normal * 10);
             particles.Play();
-        }
-
-        public void Notify(object notifier)
-        {
         }
 
         public void HideTarget()
@@ -166,7 +186,7 @@ namespace Jerre
                 return;
             }
             isDestroyed = true;
-            hitTrigger.Trigger();
+            hideTrigger.Trigger();
         }
 
     }

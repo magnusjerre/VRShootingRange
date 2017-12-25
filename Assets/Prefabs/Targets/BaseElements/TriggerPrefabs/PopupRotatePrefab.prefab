@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1329333674938358}
+  m_IsPrefabParent: 1
+--- !u!1 &1329333674938358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4869048460214248}
+  - component: {fileID: 114455424168343022}
+  - component: {fileID: 114436244579610806}
+  - component: {fileID: 114006773349141378}
+  - component: {fileID: 114607461389389116}
+  - component: {fileID: 114420757031509478}
+  m_Layer: 0
+  m_Name: PopupRotatePrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4869048460214248
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114006773349141378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: wait before destroying gameobject
+  mListeners:
+  - {fileID: 114607461389389116}
+  waitTime: 1
+--- !u!114 &114420757031509478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42bf10a1f122ea44d8621447f061bdf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationTarget: {fileID: 0}
+  UseWorldSpace: 0
+  RotationsPerSecond: 0.5
+  RotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &114436244579610806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbe19d368bf24cb09d1c601d20f1d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: hide
+  mListeners:
+  - {fileID: 114006773349141378}
+--- !u!114 &114455424168343022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: init
+  mListeners: []
+  waitTime: 0
+--- !u!114 &114607461389389116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: destroy gameobject
+  mListeners: []
+  FindTargetGameObject: 1

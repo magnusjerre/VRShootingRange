@@ -8,5 +8,6 @@
         public const string WEAPON = "Weapon";
         public const string SHOT_POOL = "ShotPool";
         public const string AUDIO_SOURCE_POOL = "AudioSourcePool";
+		public const string ACTUAL_TARGET = "ActualTarget";
     }
 }

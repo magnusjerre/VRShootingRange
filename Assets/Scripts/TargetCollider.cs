@@ -20,6 +20,13 @@ namespace Jerre
 
         void Start()
         {
+			if (ownerForCollider == null) {
+				var target = GetComponentInParent<Target> ();
+				if (target != null) {
+					ownerForCollider = target.gameObject;
+				}
+			}
+
             if (ownerForCollider == null)
             {
                 throw new NullReferenceException("TargetCollider must have a Target owner");
