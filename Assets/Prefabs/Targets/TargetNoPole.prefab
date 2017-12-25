@@ -50,7 +50,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4814142484985972}
   - component: {fileID: 114972050755357006}
-  - component: {fileID: 114473387292683858}
   - component: {fileID: 114387975499233976}
   - component: {fileID: 114099605805864932}
   - component: {fileID: 114539342551075086}
@@ -234,19 +233,6 @@ MonoBehaviour:
   - {fileID: 114321316423038740}
   - {fileID: 0}
   waitTime: 0
---- !u!114 &114473387292683858
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1447587977723820}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
-  meshRendererToDisable: []
 --- !u!114 &114539342551075086
 MonoBehaviour:
   m_ObjectHideFlags: 1

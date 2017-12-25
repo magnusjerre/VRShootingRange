@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Jerre
 {
-    public class Target : MonoBehaviour, IDestroyedListener, IListener, IHittable
+    public class Target : MonoBehaviour, IListener, IHittable
     {
         public Texture2D ScoreTexture;
         [SerializeField] private Transform targetTransform;
@@ -13,19 +13,11 @@ namespace Jerre
         public bool IsPlainScoreTarget;
         public bool FaceForward = true;
 
-        public bool HasSubTargets, CanOutliveSubTargets;
-        public int BonusScore, BonusTargetsDestroyed;
-        public Target[] subTargets;
-        public bool ReceivedBonus { get { return subTargets.Length != 0 && BonusTargetsDestroyed == subTargets.Length; } }
-
-        private List<IDestroyedListener> destroyedLiisteners;
-
         private int totalDestructionScore;
         public int TotalDestructionScore { get { return totalDestructionScore; } }
 
         private bool isDestroyed;
 
-        private IDestructor destructor;
 		[SerializeField] private ParticleSystem hitParticlesPrefab;
 
         public string startTriggerName, hitTriggerName;
@@ -38,13 +30,6 @@ namespace Jerre
 
         void Awake()
         {
-            destroyedLiisteners = new List<IDestroyedListener>();
-            destructor = GetComponent<IDestructor>();
-            if (destructor == null)
-            {
-                throw new NullReferenceException("Target requires an IDestructor");
-            }
-
             var triggers = GetComponents<ITriggerable>();
             for (var i = 0; i < triggers.Length; i++)
             {
@@ -95,13 +80,6 @@ namespace Jerre
             {
                 targetTransform.Rotate(Vector3.up * 180f);
             }
-            if (subTargets.Length > 0)
-            {
-                foreach (var bonusTarget in subTargets)
-                {
-                    bonusTarget.RegisterDestroyedListener(this);
-                }
-            }
 
             startTrigger.AddListener(this);
             startTrigger.Trigger();
@@ -129,10 +107,11 @@ namespace Jerre
             {
                 return Hit.Miss();
             }
+			isDestroyed = true;
             float uvX = hit.textureCoord.x;
             float uvY = hit.textureCoord.y;
             var score = GetScore(uvX, uvY);
-            totalDestructionScore = score + (ReceivedBonus ? BonusScore : 0);
+			totalDestructionScore = score;
             ShowHitParticles(hit);
             hitTrigger.Trigger();
             if (bullseyeHitSound != null && score == MaxScore)
@@ -142,16 +121,6 @@ namespace Jerre
             if (missSound != null && score == 0) {
                 PlaySound(missSound);
             }
-            for (var i = 0; i < subTargets.Length; i++)
-            {
-                subTargets[i].NotifyParentTargetDestroyed(this);
-            }
-
-            for (var i = 0; i < destroyedLiisteners.Count; i++)
-            {
-                destroyedLiisteners[i].NotifyDestroyed(this);
-            }
-            DestroyTarget();
 
             return new Hit(totalDestructionScore > 0, totalDestructionScore, hit.point);
         }
@@ -168,35 +137,6 @@ namespace Jerre
                 waitDisabler.waitTime = audioSource.clip.length;
                 waitDisabler.Trigger();
             }
-        }
-
-        public void RegisterDestroyedListener(Target listener)
-        {
-            destroyedLiisteners.Add(listener);
-        }
-
-        public void NotifyDestroyed(Target target)
-        {
-            BonusTargetsDestroyed++;
-            if (ReceivedBonus && !CanOutliveSubTargets)
-            {
-                DestroyTarget();
-            }
-        }
-
-        public void NotifyParentTargetDestroyed(Target parent)
-        {
-            destructor.DestroyAsSubTarget();
-        }
-
-        private void DestroyTarget()
-        {
-            if (isDestroyed)
-            {
-                return;
-            }
-            isDestroyed = true;
-            destructor.DestroyTarget();
         }
 
         private void ShowHitParticles(RaycastHit hit)

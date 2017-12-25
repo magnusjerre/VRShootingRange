@@ -39,7 +39,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4098108030354978}
   - component: {fileID: 114857240402488578}
-  - component: {fileID: 114425210687719726}
   - component: {fileID: 114286977336215956}
   - component: {fileID: 114767362264463154}
   - component: {fileID: 114004358027872220}
@@ -345,19 +344,6 @@ MonoBehaviour:
   time: 0.25
   angles: -90
   rotationAxis: {x: 1, y: 0, z: 0}
---- !u!114 &114425210687719726
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1650307089054514}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
-  meshRendererToDisable: []
 --- !u!114 &114738962518095074
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -70,7 +70,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4778077813673040}
   - component: {fileID: 114954253727757770}
-  - component: {fileID: 114226719067527900}
   - component: {fileID: 114011377205444242}
   - component: {fileID: 114157749483961434}
   m_Layer: 0
@@ -217,19 +216,6 @@ MonoBehaviour:
   name: StartTrigger
   mListeners: []
   waitTime: 0
---- !u!114 &114226719067527900
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1883324269757372}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
-  meshRendererToDisable: []
 --- !u!114 &114413822010969100
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4537804002234666}
   - component: {fileID: 114290743370961298}
-  - component: {fileID: 114500701362145178}
   - component: {fileID: 114003188563529998}
   - component: {fileID: 114726917213016558}
   - component: {fileID: 114688148809183070}
@@ -323,19 +322,6 @@ MonoBehaviour:
   lifetime: 5
   bullseyeHitSound: {fileID: 0}
   missSound: {fileID: 0}
---- !u!114 &114500701362145178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1170051416649482}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
-  meshRendererToDisable: []
 --- !u!114 &114533117165555870
 MonoBehaviour:
   m_ObjectHideFlags: 1

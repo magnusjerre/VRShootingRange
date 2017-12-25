@@ -71,7 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4456792284165164}
   - component: {fileID: 114747546142677220}
-  - component: {fileID: 114358008463591098}
   - component: {fileID: 114796835704019872}
   - component: {fileID: 114829794339750556}
   m_Layer: 0
@@ -232,19 +231,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f58ad4beb51424695ac5a8b817d9cb77, type: 3}
---- !u!114 &114358008463591098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1712391616056036}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e588c258dee40b88cc53b9cdcd50bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
-  meshRendererToDisable: []
 --- !u!114 &114391355265451562
 MonoBehaviour:
   m_ObjectHideFlags: 1
