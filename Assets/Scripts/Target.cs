@@ -8,7 +8,6 @@ namespace Jerre
     {
         public Texture2D ScoreTexture;
         [SerializeField] private Transform targetTransform;
-        private Texture2D actualTargetTexture;
         public int MaxScore = 100;
         public bool AllowNegativeScore;
         public bool IsPlainScoreTarget;
@@ -27,7 +26,7 @@ namespace Jerre
         private bool isDestroyed;
 
         private IDestructor destructor;
-        [SerializeField] private ParticleSystem hitParticles;
+		[SerializeField] private ParticleSystem hitParticlesPrefab;
 
         public string startTriggerName, hitTriggerName;
         private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger();
@@ -44,17 +43,6 @@ namespace Jerre
             if (destructor == null)
             {
                 throw new NullReferenceException("Target requires an IDestructor");
-            }
-            if (hitParticles == null)
-                hitParticles = GetComponent<ParticleSystem>();
-
-            if (targetTransform != null)
-            {
-                var material = targetTransform.GetComponent<Renderer>().material;
-                if (material != null)
-                {
-                    actualTargetTexture = (Texture2D)material.mainTexture;
-                }
             }
 
             var triggers = GetComponents<ITriggerable>();
@@ -74,11 +62,6 @@ namespace Jerre
             var targetCollider = GetTargetCollider();
             targetCollider.SetOwner(gameObject);
             SetTargetTransform(targetCollider);
-
-            if (hitParticles == null)
-            {
-                targetTransform.GetComponent<ParticleSystem>();
-            }
 
             audioSourcePool = GameObject.FindGameObjectWithTag(Tags.AUDIO_SOURCE_POOL).GetComponent<Pool>();
         }
@@ -218,14 +201,16 @@ namespace Jerre
 
         private void ShowHitParticles(RaycastHit hit)
         {
-            if (hitParticles == null)
+			if (hitParticlesPrefab == null || targetTransform == null)
             {
                 return;
             }
-            int x = (int)(hit.textureCoord.x * actualTargetTexture.width);
-            int y = (int)(hit.textureCoord.y * actualTargetTexture.height);
-            Color particleHitColor = actualTargetTexture.GetPixel(x, y);
-            var colorOverLifetime = hitParticles.colorOverLifetime;
+			var targetColorTexture = (Texture2D) targetTransform.GetComponent<Renderer>().sharedMaterial.mainTexture;
+			int x = (int)(hit.textureCoord.x * targetColorTexture.width);
+			int y = (int)(hit.textureCoord.y * targetColorTexture.height);
+			Color particleHitColor = targetColorTexture.GetPixel(x, y);
+			var particles = Instantiate (hitParticlesPrefab, targetTransform);
+			var particleColors = particles.colorOverLifetime;
             var instanceGradient = new Gradient();
             instanceGradient.SetKeys(
                 new GradientColorKey[]{
@@ -236,10 +221,11 @@ namespace Jerre
                 new GradientAlphaKey(0.3f, 0.6f),
                 new GradientAlphaKey(0f, 0f)
             });
-            colorOverLifetime.color = instanceGradient;
-            hitParticles.transform.position = hit.point;
-            hitParticles.transform.LookAt(hit.point + hit.normal * 10);
-            hitParticles.Play();
+            particleColors.color = instanceGradient;
+			particles.transform.parent = targetTransform;
+            particles.transform.position = hit.point;
+            particles.transform.LookAt(hit.point + hit.normal * 10);
+            particles.Play();
         }
 
         public void Notify(object notifier)

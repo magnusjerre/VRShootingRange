@@ -14,6 +14,7 @@ namespace Jerre
 
         void Start()
         {
+			/*
             SetParticleSystem();
 
             collider = GetComponent<Collider>();
@@ -22,6 +23,7 @@ namespace Jerre
             {
                 meshRendererToDisable.Add(thisMeshRenderer);
             }
+            */
         }
 
         private void SetParticleSystem()
@@ -44,9 +46,11 @@ namespace Jerre
 
         public void DestroyTarget()
         {
+			/*
             DestroyAsSubTarget();
             particleSystem.Play();
             Invoke("DestroyThisObject", particleSystem.main.duration);
+            */
         }
 
         public void DestroyAsSubTarget()
