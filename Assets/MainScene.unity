@@ -5077,9 +5077,16 @@ MonoBehaviour:
   SpawnForwards: 1
   initialSpawnDelay: 0
   initialSpawning:
-    target: {fileID: 114267376823665734, guid: a93ffb3f065554692b21a5cdc7bdf5b8, type: 2}
+    target: {fileID: 114514652603883786, guid: 097c2b16cfc234746a3e2b686388ad38, type: 2}
     targetLifetime: -1
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes:
+    - 0.5
+    - 1
+    - 0.5
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings: []
   repeat: -1
 --- !u!4 &552131594 stripped
@@ -5565,9 +5572,16 @@ MonoBehaviour:
   SpawnForwards: 1
   initialSpawnDelay: 0
   initialSpawning:
-    target: {fileID: 114267376823665734, guid: a93ffb3f065554692b21a5cdc7bdf5b8, type: 2}
+    target: {fileID: 114514652603883786, guid: 097c2b16cfc234746a3e2b686388ad38, type: 2}
     targetLifetime: -1
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes:
+    - 0.5
+    - 1
+    - 0.5
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings: []
   repeat: -1
 --- !u!1001 &628383273
@@ -6165,13 +6179,25 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114311661626432108, guid: f7662505dd02141a9bbec9eff3ed9b6d, type: 2}
     targetLifetime: 8
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 12
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: -1
 --- !u!1001 &689733846
 Prefab:
@@ -6387,19 +6413,39 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114997493753900834, guid: 0ca8f38697f0c46b5bf93fa3b0a2d5bf, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 114175168473595620, guid: 5c031b6f31cfb4233bda7eb0a56402b9, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 114534585835967572, guid: c1e428df48f074a16b376756a3290ae0, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 114175168473595620, guid: 5c031b6f31cfb4233bda7eb0a56402b9, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: -1
 --- !u!1001 &709869940
 Prefab:
@@ -7034,13 +7080,25 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114514652603883786, guid: 097c2b16cfc234746a3e2b686388ad38, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 8
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: -1
 --- !u!4 &859824042
 Transform:
@@ -9155,10 +9213,18 @@ MonoBehaviour:
     target: {fileID: 114208692616210102, guid: b0fe8529c3b3d4bda8cc2d3c9279c573, type: 2}
     targetLifetime: 2
     nextSpawnDelay: 0.5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114208692616210102, guid: b0fe8529c3b3d4bda8cc2d3c9279c573, type: 2}
     targetLifetime: 2
     nextSpawnDelay: 0.5
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: 10
 --- !u!1001 &1127231962
 Prefab:
@@ -14194,13 +14260,25 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114208692616210102, guid: b0fe8529c3b3d4bda8cc2d3c9279c573, type: 2}
     targetLifetime: 5
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 8
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: -1
 --- !u!1001 &1850053896
 Prefab:
@@ -15743,16 +15821,32 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLifetime: 0
     nextSpawnDelay: 0
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   spawnings:
   - target: {fileID: 114534585835967572, guid: c1e428df48f074a16b376756a3290ae0, type: 2}
     targetLifetime: 3
     nextSpawnDelay: 6
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 114997493753900834, guid: 0ca8f38697f0c46b5bf93fa3b0a2d5bf, type: 2}
     targetLifetime: 8
     nextSpawnDelay: 9
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   - target: {fileID: 114175168473595620, guid: 5c031b6f31cfb4233bda7eb0a56402b9, type: 2}
     targetLifetime: 6
     nextSpawnDelay: 7
+    WaverDeltaAngles: []
+    WaverAnimationTimes: []
+    customizeRotations: 0
+    rotationsPerSecond: 0
   repeat: -1
 --- !u!1001 &2073779327
 Prefab:

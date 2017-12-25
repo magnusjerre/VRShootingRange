@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
-  triggerObjectPrefab: {fileID: 4016598946522952, guid: 895131b72507d43ec993a39520d30209,
+  triggerObjectPrefab: {fileID: 4600187419029608, guid: 65823ec4ceb4643f1b3fb772be50ce1e,
     type: 2}
   offsetObjectPrefab: {fileID: 4580557037917342, guid: d8da18a5c08cb4e989b8a9e4bc50654e,
     type: 2}

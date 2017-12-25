@@ -19,6 +19,7 @@ namespace Jerre
 
         void Awake()
         {
+			Debug.Log ("Awaking Waver");
             if (DeltaAngles.Length < 2)
             {
                 throw new IndexOutOfRangeException("Angles must have a length of at least 2");
@@ -67,5 +68,16 @@ namespace Jerre
             totalRotation += deltaRot;
             targetTransform.Rotate(deltaRot * RotationAxis, space);
         }
+
+		public void ApplyCustomisation(float[] deltaAngles, float[] animationTimes) {
+			Debug.Log ("Apply customisations");
+			if (deltaAngles != null && deltaAngles.Length > 0) {
+				this.DeltaAngles = deltaAngles;
+			}
+			if (animationTimes != null && animationTimes.Length > 0) {
+				Debug.Log ("animation times should be set");
+				this.AnimationTimes = animationTimes;
+			}
+		}
     }
 }

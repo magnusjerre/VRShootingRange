@@ -29,5 +29,9 @@ namespace Jerre
                 rotationTarget.Rotate(RotationAxis * Time.deltaTime * RotationsPerSecond * 360f, Space.Self);
             }
         }
+
+		public void ApplyCustomisation(float rotationsPerSecond) {
+			RotationsPerSecond = rotationsPerSecond;
+		}
     }
 }

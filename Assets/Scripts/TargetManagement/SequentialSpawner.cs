@@ -37,6 +37,7 @@ namespace Jerre {
 					if (spawnings [currentSpawnIndex].target != null) {
 						var target = SpawnTarget (spawnings [currentSpawnIndex].target, transform.GetChild (currentChildIndex));
 						target.lifetime = spawnings [currentSpawnIndex].targetLifetime;
+						ApplyCustomisations (target, spawnings [currentSpawnIndex]);
 					}
                     currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;                   
                     NextChild();
@@ -58,6 +59,7 @@ namespace Jerre {
                 } else {
                     var target = SpawnTarget(initialSpawning.target, transform.GetChild(0));
                     target.lifetime = initialSpawning.targetLifetime;
+					ApplyCustomisations (target, initialSpawning);
                     NextChild();
                     ReduceRepeat();
                 }
@@ -70,6 +72,7 @@ namespace Jerre {
                 elapsedTime = 0f;
                 var target = SpawnTarget(spawnings[currentSpawnIndex].target, transform.GetChild(currentChildIndex));
                 target.lifetime = spawnings[currentSpawnIndex].targetLifetime;
+				ApplyCustomisations (target, spawnings [currentSpawnIndex]);
                 currentSpawnIndex = (currentSpawnIndex + 1) % spawnings.Length;
                 NextChild();
                 ReduceRepeat();
@@ -129,5 +132,9 @@ namespace Jerre {
             } 
             enabled = false;
         }
+
+		private void ApplyCustomisations(Target target, SpawnInfo spawnInfo) {
+			target.ApplyCustomisation (spawnInfo.WaverDeltaAngles, spawnInfo.WaverAnimationTimes, spawnInfo.customizeRotations, spawnInfo.rotationsPerSecond);
+		}
     }
 }

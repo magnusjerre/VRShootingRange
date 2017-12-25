@@ -9,34 +9,34 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1597562320812330}
+  m_RootGameObject: {fileID: 1779655639140244}
   m_IsPrefabParent: 1
---- !u!1 &1597562320812330
+--- !u!1 &1779655639140244
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4890554317166962}
-  - component: {fileID: 114802328076740596}
-  - component: {fileID: 114595707050677028}
-  - component: {fileID: 114367740190234966}
-  - component: {fileID: 114522223979777470}
-  - component: {fileID: 114538839454745364}
+  - component: {fileID: 4600187419029608}
+  - component: {fileID: 114110224258572526}
+  - component: {fileID: 114618620793300148}
+  - component: {fileID: 114296265862971238}
+  - component: {fileID: 114058687000204022}
+  - component: {fileID: 114864276778767596}
   m_Layer: 0
-  m_Name: PopupWaveFastPrefab
+  m_Name: PopupSwingPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4890554317166962
+--- !u!4 &4600187419029608
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
+  m_GameObject: {fileID: 1779655639140244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -44,27 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114367740190234966
+--- !u!114 &114058687000204022
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: wait before destroying gameobject
-  mListeners:
-  - {fileID: 114522223979777470}
-  waitTime: 1
---- !u!114 &114522223979777470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
+  m_GameObject: {fileID: 1779655639140244}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
@@ -73,48 +58,12 @@ MonoBehaviour:
   name: destroy gameobject
   mListeners: []
   FindTargetGameObject: 1
---- !u!114 &114538839454745364
+--- !u!114 &114110224258572526
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16fcc370e15377946918536d466ccde8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
-  DeltaAngles:
-  - 30
-  - -60
-  - 30
-  AnimationTimes:
-  - 0.5
-  - 1
-  - 0.5
-  RotationAxis: {x: 0, y: 0, z: 1}
-  space: 1
---- !u!114 &114595707050677028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbe19d368bf24cb09d1c601d20f1d60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: hide
-  mListeners:
-  - {fileID: 114367740190234966}
---- !u!114 &114802328076740596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597562320812330}
+  m_GameObject: {fileID: 1779655639140244}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
@@ -123,3 +72,47 @@ MonoBehaviour:
   name: init
   mListeners: []
   waitTime: 0
+--- !u!114 &114296265862971238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779655639140244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: wait before destroying gameobject
+  mListeners:
+  - {fileID: 114058687000204022}
+  waitTime: 1
+--- !u!114 &114618620793300148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779655639140244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbe19d368bf24cb09d1c601d20f1d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: hide
+  mListeners:
+  - {fileID: 114296265862971238}
+--- !u!114 &114864276778767596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779655639140244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7c471f7d37f4e07ac232a6e07fbc45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAngle: 45
+  damping: 0.95
+  startRotationTime: 1.5
+  rotationAxis: {x: 0, y: 0, z: 1}

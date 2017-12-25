@@ -189,5 +189,17 @@ namespace Jerre
             hideTrigger.Trigger();
         }
 
+		public void ApplyCustomisation(float[] deltaAngles, float[] animationTimes, bool hasRotationInfo, float rotationsPerSecond) {
+			var waver = triggerObjectInstance.GetComponent<Waver> ();
+			if (waver != null) {
+				waver.ApplyCustomisation (deltaAngles, animationTimes);
+			}
+
+			var rotator = triggerObjectInstance.GetComponent<Rotator> ();
+			if (rotator != null && hasRotationInfo) {
+				rotator.ApplyCustomisation (rotationsPerSecond);
+			}
+		}
+
     }
 }
