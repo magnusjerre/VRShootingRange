@@ -7,8 +7,7 @@ namespace Jerre
         private GameController gameController;
         [SerializeField] private Transform actualTarget;
         private ParticleSystem hitParticles;
-        public string startTriggerName, hitTriggerName, initTriggerName, waitTriggerName;
-        private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger(), initTrigger = new EmptyTrigger(), waitTrigger = new EmptyTrigger();
+		[SerializeField] private BaseTriggerable initTrigger, startTrigger, hitTrigger, waitTrigger;
         private bool canReceiveHit;
 
         public Texture2D ScoreTexture;
@@ -28,30 +27,10 @@ namespace Jerre
                 FlipRotation();
             }
             var triggers = GetComponents<ITriggerable>();
-            for (var i = 0; i < triggers.Length; i++)
-            {
-                var trigger = triggers[i];
-                if (trigger.Name().Equals(startTriggerName))
-                {
-                    startTrigger = trigger;
-                    trigger.AddListener(this);
-                }
-                else if (trigger.Name().Equals(hitTriggerName))
-                {
-                    hitTrigger = trigger;
-                    trigger.AddListener(this);
-                }
-                else if (trigger.Name().Equals(initTriggerName))
-                {
-                    initTrigger = trigger;
-                    trigger.AddListener(this);
-                }
-                else if (trigger.Name().Equals(waitTriggerName))
-                {
-                    waitTrigger = trigger;
-                    trigger.AddListener(this);
-                }
-            }
+			initTrigger.AddListener (this);
+			startTrigger.AddListener (this);
+			hitTrigger.AddListener (this);
+			waitTrigger.AddListener (this);
 
             initTrigger.Trigger();
         }

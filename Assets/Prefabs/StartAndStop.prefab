@@ -307,10 +307,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualTarget: {fileID: 4654233719529006}
-  startTriggerName: start
-  hitTriggerName: hit
-  initTriggerName: init
-  waitTriggerName: wait
+  initTrigger: {fileID: 114819815252385968}
+  startTrigger: {fileID: 114117313299600456}
+  hitTrigger: {fileID: 114007240128577354}
+  waitTrigger: {fileID: 114032067280762978}
   ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
 --- !u!114 &114707699830804286
 MonoBehaviour:
@@ -339,6 +339,7 @@ MonoBehaviour:
   mListeners: []
   rotationAmount: -90
   rotationAxis: {x: 1, y: 0, z: 0}
+  rotateOnAwake: 0
 --- !u!198 &198477959832765958
 ParticleSystem:
   m_ObjectHideFlags: 1

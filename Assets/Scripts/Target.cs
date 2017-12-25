@@ -20,8 +20,7 @@ namespace Jerre
 
 		[SerializeField] private ParticleSystem hitParticlesPrefab;
 
-        public string startTriggerName, hitTriggerName;
-        private ITriggerable startTrigger = new EmptyTrigger(), hitTrigger = new EmptyTrigger();
+		[SerializeField] private BaseTriggerable initTrigger, hitTrigger;
         public float lifetime = 5f;
 
         [SerializeField] private AudioClip bullseyeHitSound;
@@ -30,20 +29,6 @@ namespace Jerre
 
         void Awake()
         {
-            var triggers = GetComponents<ITriggerable>();
-            for (var i = 0; i < triggers.Length; i++)
-            {
-                var trigger = triggers[i];
-                if (trigger.Name().Equals("StartTrigger"))
-                {
-                    startTrigger = trigger;
-                }
-                else if (trigger.Name().Equals("HitTrigger"))
-                {
-                    hitTrigger = trigger;
-                }
-            }
-
             var targetCollider = GetTargetCollider();
             targetCollider.SetOwner(gameObject);
             SetTargetTransform(targetCollider);
@@ -81,8 +66,10 @@ namespace Jerre
                 targetTransform.Rotate(Vector3.up * 180f);
             }
 
-            startTrigger.AddListener(this);
-            startTrigger.Trigger();
+            initTrigger.Trigger();
+			if (lifetime != -1) {
+				Invoke("HideTarget", lifetime);
+			}
         }
 
         public int GetScore(float posX, float posY)
@@ -170,10 +157,6 @@ namespace Jerre
 
         public void Notify(object notifier)
         {
-			if (notifier == startTrigger && lifetime != -1)
-            {
-                Invoke("HideTarget", lifetime);
-            }
         }
 
         public void HideTarget()

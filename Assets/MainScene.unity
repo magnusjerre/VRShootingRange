@@ -14959,7 +14959,7 @@ MonoBehaviour:
   SpawnForwards: 1
   initialSpawnDelay: 0
   initialSpawning:
-    target: {fileID: 0}
+    target: {fileID: 114857240402488578, guid: 488f39eb91604a14fa898d1c334ff3a1, type: 2}
     targetLifetime: 0
     nextSpawnDelay: 0
   spawnings:

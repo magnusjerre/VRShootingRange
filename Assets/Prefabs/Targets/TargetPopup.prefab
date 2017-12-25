@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114747546142677220}
   - component: {fileID: 114796835704019872}
   - component: {fileID: 114829794339750556}
+  - component: {fileID: 114704332187151358}
   m_Layer: 0
   m_Name: TargetPopup
   m_TagString: Untagged
@@ -243,6 +244,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerForCollider: {fileID: 1712391616056036}
+--- !u!114 &114704332187151358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712391616056036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  mListeners: []
+  waitTime: 0
 --- !u!114 &114747546142677220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,15 +275,10 @@ MonoBehaviour:
   AllowNegativeScore: 0
   IsPlainScoreTarget: 0
   FaceForward: 1
-  HasSubTargets: 0
-  CanOutliveSubTargets: 0
-  BonusScore: 0
-  BonusTargetsDestroyed: 0
-  subTargets: []
   hitParticlesPrefab: {fileID: 198939113912366042, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
     type: 2}
-  startTriggerName: 
-  hitTriggerName: 
+  initTrigger: {fileID: 114704332187151358}
+  hitTrigger: {fileID: 114796835704019872}
   lifetime: 5
   bullseyeHitSound: {fileID: 0}
   missSound: {fileID: 0}
@@ -283,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a2fd0f447c468eaeb3e90f0309d376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: HitTrigger
+  name: hit
   mListeners:
   - {fileID: 114829794339750556}
   time: 0.25

@@ -70,8 +70,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4778077813673040}
   - component: {fileID: 114954253727757770}
-  - component: {fileID: 114011377205444242}
   - component: {fileID: 114157749483961434}
+  - component: {fileID: 114011377205444242}
   m_Layer: 0
   m_Name: TargetNoPoleWaving
   m_TagString: Untagged
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: HitTrigger
+  name: hit
   mListeners: []
 --- !u!114 &114157749483961434
 MonoBehaviour:
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: StartTrigger
+  name: init
   mListeners: []
   waitTime: 0
 --- !u!114 &114413822010969100
@@ -240,20 +240,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
-  targetTransform: {fileID: 4549155832749536, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
-    type: 2}
+  targetTransform: {fileID: 4534166738494090}
   MaxScore: 100
   AllowNegativeScore: 0
   IsPlainScoreTarget: 0
   FaceForward: 1
-  HasSubTargets: 0
-  CanOutliveSubTargets: 0
-  BonusScore: 0
-  BonusTargetsDestroyed: 0
-  subTargets: []
-  hitParticlesPrefab: {fileID: 0}
-  startTriggerName: 
-  hitTriggerName: 
+  hitParticlesPrefab: {fileID: 198939113912366042, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
+    type: 2}
+  initTrigger: {fileID: 114157749483961434}
+  hitTrigger: {fileID: 114011377205444242}
   lifetime: 5
   bullseyeHitSound: {fileID: 0}
   missSound: {fileID: 0}

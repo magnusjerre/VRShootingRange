@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: HitTrigger
+  name: hit
   mListeners: []
 --- !u!114 &114321316423038740
 MonoBehaviour:
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: StartTrigger
+  name: init
   mListeners:
   - {fileID: 114321316423038740}
   - {fileID: 0}
@@ -276,15 +276,10 @@ MonoBehaviour:
   AllowNegativeScore: 0
   IsPlainScoreTarget: 0
   FaceForward: 1
-  HasSubTargets: 0
-  CanOutliveSubTargets: 0
-  BonusScore: 0
-  BonusTargetsDestroyed: 0
-  subTargets: []
   hitParticlesPrefab: {fileID: 198939113912366042, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
     type: 2}
-  startTriggerName: 
-  hitTriggerName: 
+  initTrigger: {fileID: 114387975499233976}
+  hitTrigger: {fileID: 114099605805864932}
   lifetime: 5
   bullseyeHitSound: {fileID: 8300000, guid: 8c8ee018e7623b2498995d4a8db4f9c3, type: 3}
   missSound: {fileID: 8300000, guid: 89af1e1dd7c5e6c4eb3fc146bd6dab5f, type: 3}
