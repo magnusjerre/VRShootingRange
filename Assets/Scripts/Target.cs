@@ -26,8 +26,11 @@ namespace Jerre
         private int totalDestructionScore;
         public int TotalDestructionScore { get { return totalDestructionScore; } }
         private bool isDestroyed;
+		public bool IsDestroyed { get { return isDestroyed; } }
+		private bool isHiding;
 
 		private ITriggerable initTrigger, hideTrigger;
+		public ITriggerable HideTrigger { get { return hideTrigger; } }
         public float lifetime = 5f;
 
         [SerializeField] private AudioClip bullseyeHitSound;
@@ -116,7 +119,7 @@ namespace Jerre
 
         public Hit RegisterHit(RaycastHit hit)
         {
-            if (isDestroyed)
+			if (isDestroyed || isHiding)
             {
                 return Hit.Miss();
             }
@@ -181,11 +184,11 @@ namespace Jerre
 
         public void HideTarget()
         {
-            if (isDestroyed)
+			if (isDestroyed || isHiding)
             {
                 return;
             }
-            isDestroyed = true;
+			isHiding = true;
             hideTrigger.Trigger();
         }
 
