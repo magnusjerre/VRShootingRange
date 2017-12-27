@@ -33,7 +33,7 @@ namespace Jerre {
 				ps.Stop ();
 			}
 
-			if (target.IsDestroyed && !IsLastTargetInChain()) {
+			if (target.IsDestroyed && target.TotalDestructionScore > 0 && !IsLastTargetInChain()) {
 				Spawn ();
 			} else {
 				repeatsLeft--;
