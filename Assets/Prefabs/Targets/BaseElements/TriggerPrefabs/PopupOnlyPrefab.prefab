@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4248782936603288}
-  - component: {fileID: 114506775901852430}
+  - component: {fileID: 114424018160882380}
   - component: {fileID: 114820848478927132}
   - component: {fileID: 114439164507199126}
   - component: {fileID: 114798055335216334}
@@ -43,6 +43,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114424018160882380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724679652702996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523d2ac09d2664d589827ba78be6e323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: init
+  mListeners: []
+  particleSystemPrefab: {fileID: 198822706697351896, guid: a0272adb13e304b0d9ebd0d7f945070c,
+    type: 2}
 --- !u!114 &114439164507199126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,20 +73,6 @@ MonoBehaviour:
   mListeners:
   - {fileID: 114798055335216334}
   waitTime: 1
---- !u!114 &114506775901852430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1724679652702996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: init
-  mListeners: []
-  waitTime: 0
 --- !u!114 &114798055335216334
 MonoBehaviour:
   m_ObjectHideFlags: 1

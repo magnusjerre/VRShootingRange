@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4016598946522952}
-  - component: {fileID: 114943828605588906}
+  - component: {fileID: 114559566937229394}
   - component: {fileID: 114147117791046432}
   - component: {fileID: 114320976091327564}
   - component: {fileID: 114777619519833158}
@@ -73,6 +73,21 @@ MonoBehaviour:
   mListeners:
   - {fileID: 114777619519833158}
   waitTime: 1
+--- !u!114 &114559566937229394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499359529254518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523d2ac09d2664d589827ba78be6e323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: init
+  mListeners: []
+  particleSystemPrefab: {fileID: 198822706697351896, guid: a0272adb13e304b0d9ebd0d7f945070c,
+    type: 2}
 --- !u!114 &114718762053288610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,17 +124,3 @@ MonoBehaviour:
   name: destroy gameobject
   mListeners: []
   FindTargetGameObject: 1
---- !u!114 &114943828605588906
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499359529254518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: init
-  mListeners: []
-  waitTime: 0

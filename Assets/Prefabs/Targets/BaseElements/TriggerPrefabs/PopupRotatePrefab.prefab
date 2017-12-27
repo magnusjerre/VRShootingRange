@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4869048460214248}
-  - component: {fileID: 114455424168343022}
+  - component: {fileID: 114657925635235570}
   - component: {fileID: 114436244579610806}
   - component: {fileID: 114006773349141378}
   - component: {fileID: 114607461389389116}
@@ -88,20 +88,6 @@ MonoBehaviour:
   name: hide
   mListeners:
   - {fileID: 114006773349141378}
---- !u!114 &114455424168343022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1329333674938358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: init
-  mListeners: []
-  waitTime: 0
 --- !u!114 &114607461389389116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,3 +102,18 @@ MonoBehaviour:
   name: destroy gameobject
   mListeners: []
   FindTargetGameObject: 1
+--- !u!114 &114657925635235570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329333674938358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523d2ac09d2664d589827ba78be6e323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: init
+  mListeners: []
+  particleSystemPrefab: {fileID: 198822706697351896, guid: a0272adb13e304b0d9ebd0d7f945070c,
+    type: 2}
