@@ -64,7 +64,7 @@ namespace Jerre {
                     ReduceRepeat();
                 }
             }
-            else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay)
+            else if (waitForInitialNextSpawnDelay && elapsedTime >= initialSpawning.nextSpawnDelay && spawnings.Length != 0)
             {   //Initial target delay finished, spawn spawnings[0] immediately
                 waitForInitialDelay = false;
                 waitForInitialNextSpawnDelay = false;
