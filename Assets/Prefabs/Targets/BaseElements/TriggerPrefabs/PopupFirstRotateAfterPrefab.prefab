@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1958593692195866}
+  m_IsPrefabParent: 1
+--- !u!1 &1958593692195866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4010145183052990}
+  - component: {fileID: 114068830312972294}
+  - component: {fileID: 114925619596249874}
+  - component: {fileID: 114352948555965410}
+  - component: {fileID: 114165472741090264}
+  - component: {fileID: 114067699706965590}
+  - component: {fileID: 114470032880537758}
+  - component: {fileID: 114861117685112618}
+  m_Layer: 0
+  m_Name: PopupFirstRotateAfterPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4010145183052990
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114067699706965590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbe19d368bf24cb09d1c601d20f1d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: hide mesh
+  mListeners:
+  - {fileID: 114470032880537758}
+--- !u!114 &114068830312972294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523d2ac09d2664d589827ba78be6e323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: init
+  mListeners: []
+  particleSystemPrefab: {fileID: 198822706697351896, guid: a0272adb13e304b0d9ebd0d7f945070c,
+    type: 2}
+--- !u!114 &114165472741090264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61b402d3da1fc341be5d5e8a008ef34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: scale on hide
+  mListeners: []
+  scaleTo: {x: 0, y: 0, z: 0}
+  time: 0.25
+--- !u!114 &114352948555965410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a2fd0f447c468eaeb3e90f0309d376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: rotate on hide
+  mListeners:
+  - {fileID: 114067699706965590}
+  time: 0.25
+  angles: -90
+  rotationAxis: {x: 1, y: 0, z: 0}
+--- !u!114 &114470032880537758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: wait before destroying gameobject
+  mListeners:
+  - {fileID: 114861117685112618}
+  waitTime: 1
+--- !u!114 &114861117685112618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5382f05e9a554c7facd9946a6c04a21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: destroy gameobject
+  mListeners: []
+  FindTargetGameObject: 1
+--- !u!114 &114925619596249874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958593692195866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2c0eb69c804b97a579401a9c59db63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: hide
+  mListeners:
+  - {fileID: 114352948555965410}
+  - {fileID: 114165472741090264}
+  waitTime: 0

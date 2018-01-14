@@ -58,16 +58,24 @@ namespace Jerre
 
 		private void SetColliderOwner(Transform targetModel)
         {
-            var targetCollider = targetModel.GetComponent<TargetCollider>();
-            if (targetCollider == null)
-            {
-                targetCollider = targetModel.GetComponentInChildren<TargetCollider>();
-            }
-            if (targetCollider == null)
-            {
+            var targetColliders = targetModel.GetComponentsInChildren<TargetCollider>();
+            if (targetColliders.Length == 0) {
                 throw new NullReferenceException("Must have a targetCollider");
             }
-			targetCollider.SetOwner (gameObject);
+            for (var i = 0; i < targetColliders.Length; i++) {
+                targetColliders[i].SetOwner(gameObject);
+            }
+
+            // var targetCollider = targetModel.GetComponent<TargetCollider>();
+            // if (targetCollider == null)
+            // {
+            //     targetCollider = targetModel.GetComponentInChildren<TargetCollider>();
+            // }
+            // if (targetCollider == null)
+            // {
+                
+            // }
+			// targetCollider.SetOwner (gameObject);
         }
 
 		private void SetInitAndHitTriggers() {
