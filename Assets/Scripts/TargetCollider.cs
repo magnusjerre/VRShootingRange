@@ -29,7 +29,7 @@ namespace Jerre
 
             if (ownerForCollider == null)
             {
-                throw new NullReferenceException("TargetCollider must have a Target owner");
+                // throw new NullReferenceException("TargetCollider must have a Target owner");
             }
         }
 

@@ -56,7 +56,7 @@ MonoBehaviour:
     type: 2}
   offsetObjectPrefab: {fileID: 4299711148371698, guid: 446689fdd2e26446b963b51ac647d63c,
     type: 2}
-  targetModelPrefab: {fileID: 4748837532787966, guid: 9fb645ace6b4b6448b970d53d38b9555,
+  targetModelPrefab: {fileID: 4997322089548898, guid: ea5c24b1e0acf6b41bb3aeb40119df13,
     type: 2}
   hitParticlesPrefab: {fileID: 198939113912366042, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
     type: 2}
