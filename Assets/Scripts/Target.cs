@@ -17,6 +17,7 @@ namespace Jerre
 		private Transform targetModelInstance;
 		private Transform triggerObjectInstance;
 		private Texture2D targetColorTexture;
+        private Color targetColor;
         
 		public int MaxScore = 100;
         public bool AllowNegativeScore;
@@ -51,6 +52,7 @@ namespace Jerre
 			targetModelInstance.rotation = totalOffset.rotation;
 			SetColliderOwner (targetModelInstance);
 			targetColorTexture = (Texture2D) targetModelInstance.GetChild(0).GetComponent<Renderer>().sharedMaterial.mainTexture;
+            targetColor = targetModelInstance.GetChild(0).GetComponent<Renderer>().sharedMaterial.color;
 			SetInitAndHitTriggers ();
 
             audioSourcePool = GameObject.FindGameObjectWithTag(Tags.AUDIO_SOURCE_POOL).GetComponent<Pool>();
@@ -169,9 +171,12 @@ namespace Jerre
             {
                 return;
             }
-			int x = (int)(hit.textureCoord.x * targetColorTexture.width);
-			int y = (int)(hit.textureCoord.y * targetColorTexture.height);
-			Color particleHitColor = targetColorTexture.GetPixel(x, y);
+            Color particleHitColor = targetColor;
+            if (targetColorTexture != null) {
+                int x = (int)(hit.textureCoord.x * targetColorTexture.width);
+                int y = (int)(hit.textureCoord.y * targetColorTexture.height);
+                particleHitColor = targetColorTexture.GetPixel(x, y);
+            }
 			var particles = Instantiate (hitParticlesPrefab, triggerObjectInstance);
 			var particleColors = particles.colorOverLifetime;
             var instanceGradient = new Gradient();
