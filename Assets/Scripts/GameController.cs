@@ -34,6 +34,7 @@ namespace Jerre
 
         [SerializeField] private MultiplierStreak[] multiplierStreak;
         private int streakCounter;
+        private StartStop st;
 
         void Awake()
         {
@@ -114,6 +115,7 @@ namespace Jerre
             {
                 spawner.EndSpawningProcess();
             }
+            st.NotifyGameOver();
         }
 
         public void StartButtonClicked()
@@ -197,6 +199,10 @@ namespace Jerre
         {
             weaponScores.Put(weapon, 0);
             weapon.AddListener(this);
+        }
+
+        public void setStartStopInteractor(StartStop start) {
+            this.st = start;
         }
     }
 }
