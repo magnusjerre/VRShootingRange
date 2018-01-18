@@ -26,7 +26,7 @@ namespace Jerre
         public GameObject vrPlayer, nonVRPlayer;
         public Text scoreText;
 
-        [SerializeField] private Text timeText;
+        [SerializeField] private TimerScript timer;
 
         private ITargetSpawner[] gameTargetSpawners;
 
@@ -49,7 +49,6 @@ namespace Jerre
             {
                 gameTargetSpawners[i] = spawners[i].GetComponent<ITargetSpawner>();
             }
-            scoreText.text = "0";
             if (playType == PlayType.VR)
             {
                 vrPlayer.SetActive(true);
@@ -74,18 +73,7 @@ namespace Jerre
             {
                 EndGame();
             }
-            timeText.text = FormatTimeLeft(timeLeft);
-
-        }
-
-        private string FormatTimeLeft(float timeleft)
-        {
-            int timeLeftInt = (int)timeLeft;
-            int minutes = timeLeftInt / 60;
-            int seconds = timeLeftInt % 60;
-            string minuteString = minutes > 9 ? minutes.ToString() : "0" + minutes.ToString();
-            string secondsString = seconds > 9 ? seconds.ToString() : "0" + seconds.ToString();
-            return string.Format("{0}:{1}", minuteString, secondsString);
+            timer.UpdateTimeLeft(timeLeft);
         }
 
 
@@ -103,8 +91,12 @@ namespace Jerre
                 var weapon = weapons[i];
                 weaponScores.Put(weapon, 0);
             }
-            scoreText.text = GetTotalScore().ToString();
-            timeText.text = FormatTimeLeft(timeLeft);
+            scoreText.text = FormatScore(GetTotalScore());
+            timer.Begin(timeLeft);
+        }
+
+        private string FormatScore(int score) {
+            return score.ToString("# ##0");
         }
 
         public void EndGame()
@@ -116,6 +108,7 @@ namespace Jerre
                 spawner.EndSpawningProcess();
             }
             st.NotifyGameOver();
+            timer.End();
         }
 
         public void StartButtonClicked()
@@ -138,7 +131,7 @@ namespace Jerre
                 var oldScore = weaponScores.Get(weapon);
                 var hitScore = HandleStreak(hit);
                 weaponScores.Put(weapon, oldScore + hitScore);
-                scoreText.text = GetTotalScore().ToString();
+                scoreText.text = FormatScore(GetTotalScore());
                 ShowScore(hitScore, hit.HitLocation, hitScore > hit.Score, hitScore - hit.Score);
             }
             else
