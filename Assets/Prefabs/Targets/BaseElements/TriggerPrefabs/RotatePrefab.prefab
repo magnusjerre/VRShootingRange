@@ -56,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: destroy  the gameobject
   mListeners: []
+  FindTargetGameObject: 1
 --- !u!114 &114646534377824336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: show target
   mListeners: []
-  time: 0.5
+  time: 0.25
   angles: 90
   rotationAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &114886332650123738
@@ -86,7 +87,7 @@ MonoBehaviour:
   name: hide
   mListeners:
   - {fileID: 114242558411033642}
-  time: 0.5
+  time: 0.25
   angles: -90
   rotationAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &114947230914627074
