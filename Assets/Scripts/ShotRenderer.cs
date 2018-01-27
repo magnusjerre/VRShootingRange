@@ -30,7 +30,6 @@ namespace Jerre
             lineRenderer = GetComponent<LineRenderer>();
             startEndWidth = lineRenderer.endWidth;
             startStartWidth = lineRenderer.startWidth;
-            Debug.Log("startStartWidth: " + startStartWidth);
         }
 
         void Start()

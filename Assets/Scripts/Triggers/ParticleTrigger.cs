@@ -15,7 +15,6 @@ namespace Jerre {
 		}
 
 		public override void Trigger() {
-			Debug.Log ("Trigger called");
 			var ps = Instantiate (particleSystemPrefab, transform);
 			var shape = ps.shape;
 			Invoke ("NotifyListeners", ps.main.duration);

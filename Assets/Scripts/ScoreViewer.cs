@@ -39,9 +39,10 @@ namespace Jerre
             LookAt(target);
         }
 
-        public void Show(int score, bool isBonus, Vector3 worldPosition)
+        public void Show(int score, bool isBonus, Vector3 worldPosition, Vector3 scale)
         {
             transform.position = worldPosition;
+            scoreText.rectTransform.localScale = scale;
             scoreText.text = score.ToString();
             if (isBonus)
             {

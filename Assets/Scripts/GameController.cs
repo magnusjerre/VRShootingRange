@@ -175,15 +175,18 @@ namespace Jerre
         {
             var scorePool = GameObject.FindGameObjectWithTag(Tags.SCORE_CANVAS_POOL).GetComponent<Pool>();
             var scoreViewer = scorePool.Get<ScoreViewer>();
+            float distanceForScaleEqualToOneSqr = 330;
+            float scale = 1f + 2f * position.sqrMagnitude / distanceForScaleEqualToOneSqr;
+            Vector3 vScale = Vector3.one * scale;
             if (receivedBonus)
             {
-                scoreViewer.Show(score, false, position + Vector3.up * 0.5f);
+                scoreViewer.Show(score, false, position + Vector3.up * 0.5f, vScale);
                 var bonusScore = scorePool.Get<ScoreViewer>();
-                bonusScore.Show(bonus, true, position);
+                bonusScore.Show(bonus, true, position, vScale);
             }
             else
             {
-                scoreViewer.Show(score, false, position);
+                scoreViewer.Show(score, false, position, vScale);
             }
             Debug.Log("score: " + score);
         }
