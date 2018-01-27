@@ -177,7 +177,7 @@ namespace Jerre
                 int y = (int)(hit.textureCoord.y * targetColorTexture.height);
                 particleHitColor = targetColorTexture.GetPixel(x, y);
             }
-			var particles = Instantiate (hitParticlesPrefab, triggerObjectInstance);
+			var particles = Instantiate (hitParticlesPrefab, triggerObjectInstance.transform.position, triggerObjectInstance.transform.rotation);
 			var particleColors = particles.colorOverLifetime;
             var instanceGradient = new Gradient();
             instanceGradient.SetKeys(
@@ -192,6 +192,10 @@ namespace Jerre
             particleColors.color = instanceGradient;
             particles.transform.position = hit.point;
             particles.transform.LookAt(hit.point + hit.normal * 10);
+            float distanceForScaleEqualToOneSqr = 330;
+            float minScale = 0.4f;
+            float scale = Mathf.Max(minScale, transform.position.sqrMagnitude / distanceForScaleEqualToOneSqr);
+            particles.transform.localScale = Vector3.one * scale;
             particles.Play();
         }
 
