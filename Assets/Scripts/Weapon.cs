@@ -16,6 +16,8 @@ namespace Jerre
         private IHitlistener hitListener;
         private Pool shotRendererPool;
         private AudioSource audioShot;
+        
+        private Animator animator;
 
         public bool CanFire()
         {
@@ -30,6 +32,7 @@ namespace Jerre
             fireParticles = GetComponentInChildren<ParticleSystem>();
             elapsedTime = FireInterval;
             GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
+            animator = GetComponentInChildren<Animator>();
         }
 
         void Update()
@@ -47,6 +50,9 @@ namespace Jerre
 
             audioShot.Play();
             fireParticles.Play();
+            if (animator != null) {
+                animator.SetTrigger("Fire");
+            }
             Ray ray = new Ray(muzzle.position, muzzle.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, MaxShotLength))
