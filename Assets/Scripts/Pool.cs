@@ -18,6 +18,7 @@ namespace Jerre
             {
                 var instance = Instantiate(prefab);
                 instance.SetActive(false);
+                instance.transform.parent = transform;
                 pool.Add(instance);
             }
         }
@@ -41,6 +42,7 @@ namespace Jerre
             }
 
             var instance = Instantiate(prefab);
+            instance.transform.parent = transform;
             pool.Add(instance);
             return instance.GetComponent<T>();
         }
