@@ -57,6 +57,7 @@ namespace Jerre
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, MaxShotLength))
             {
+				shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
                 var targetCollider = hit.collider.GetComponent<TargetCollider>();
                 if (targetCollider != null)
                 {
@@ -65,13 +66,11 @@ namespace Jerre
                     {
                         hitListener.NotifyHit(tHit, this);
                     }
-                    shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
                     return true;
                 }
                 if (hitListener != null)
                 {
                     hitListener.NotifyHit(Hit.Miss(), this);
-                    shotRendererPool.Get<ShotRenderer>().ShowShot(muzzle.position, hit.point);
                 }
             }
             else
