@@ -159,6 +159,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4196840695005306}
+  - component: {fileID: 65599732316805134}
   m_Layer: 0
   m_Name: Cabin
   m_TagString: Untagged
@@ -1700,3 +1701,15 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65599732316805134
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1316568898639372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.7582026, y: 3.5427752, z: 6.82436}
+  m_Center: {x: -0.013350487, y: 1.7805438, z: -3.5855713}
