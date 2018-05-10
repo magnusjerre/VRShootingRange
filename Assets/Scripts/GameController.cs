@@ -24,7 +24,7 @@ namespace Jerre
 
         public PlayType playType;
         public GameObject vrPlayer, nonVRPlayer;
-        public Text scoreText;
+        public Text scoreText, nHitsText, nMissText, streakText, bestStreakText;
 
         [SerializeField] private TimerScript timer;
 
@@ -33,7 +33,7 @@ namespace Jerre
         private Map<IWeapon, int> weaponScores;
 
         [SerializeField] private MultiplierStreak[] multiplierStreak;
-        private int streakCounter;
+        private int streakCounter, hitCount, missCount, bestStreak;
         private StartStop st;
 
         void Awake()
@@ -45,6 +45,7 @@ namespace Jerre
         {
             var spawners = GameObject.FindGameObjectsWithTag(Tags.GAME_TARGET_SPAWNER);
             gameTargetSpawners = new ITargetSpawner[spawners.Length];
+			HandleScoring (0, 0, 0, 0, 0);
             for (var i = 0; i < gameTargetSpawners.Length; i++)
             {
                 gameTargetSpawners[i] = spawners[i].GetComponent<ITargetSpawner>();
@@ -79,6 +80,7 @@ namespace Jerre
 
         public void StartGame()
         {
+			hitCount = missCount = streakCounter = bestStreak = 0;
             timeLeft = gameTime;
             isPlaying = true;
             for (var i = 0; i < gameTargetSpawners.Length; i++)
@@ -91,11 +93,13 @@ namespace Jerre
                 var weapon = weapons[i];
                 weaponScores.Put(weapon, 0);
             }
-            scoreText.text = FormatScore(GetTotalScore());
+			HandleScoring (GetTotalScore (), hitCount, missCount, streakCounter, bestStreak);
             timer.Begin(timeLeft);
         }
 
         private string FormatScore(int score) {
+			if (score < 1)
+				return "-";
             return score.ToString("# ##0");
         }
 
@@ -125,20 +129,23 @@ namespace Jerre
 
         public void NotifyHit(Hit hit, IWeapon weapon)
         {
-            if (hit.IsHit)
-            {
-                streakCounter++;
-                var oldScore = weaponScores.Get(weapon);
-                var hitScore = HandleStreak(hit);
-                weaponScores.Put(weapon, oldScore + hitScore);
-                scoreText.text = FormatScore(GetTotalScore());
-                ShowScore(hitScore, hit.HitLocation, hitScore > hit.Score, hitScore - hit.Score);
-            }
-            else
-            {
-                streakCounter = 0;
-            }
-            Debug.Log("streakCounter: " + streakCounter);
+			if (isPlaying) {
+				if (hit.IsHit) {
+					streakCounter++;
+					hitCount++;
+					if (streakCounter > bestStreak) {
+						bestStreak = streakCounter;
+					}
+					var oldScore = weaponScores.Get (weapon);
+					var hitScore = HandleStreak (hit);
+					weaponScores.Put (weapon, oldScore + hitScore);
+					ShowScore (hitScore, hit.HitLocation, hitScore > hit.Score, hitScore - hit.Score);
+				} else if (hit.IsMiss) {
+					missCount++;
+					streakCounter = 0;
+				}
+				HandleScoring (GetTotalScore (), hitCount, missCount, streakCounter, bestStreak);
+			}
         }
 
         private int GetTotalScore()
@@ -200,5 +207,13 @@ namespace Jerre
         public void setStartStopInteractor(StartStop start) {
             this.st = start;
         }
+
+		private void HandleScoring(int totalScore, int nHits, int nMiss, int streak, int bestStreak) {
+			scoreText.text = FormatScore (totalScore);
+			nHitsText.text = FormatScore (nHits);
+			nMissText.text = FormatScore (nMiss);
+			streakText.text = FormatScore (streak);
+			bestStreakText.text = FormatScore (bestStreak);
+		}
     }
 }

@@ -5,26 +5,33 @@ namespace Jerre
 {
     public struct Hit
     {
-        public bool IsHit;
+		public HitEnum hitType;
+		public bool IsHit { get { return hitType == HitEnum.HIT; } }
+		public bool IsMiss { get { return hitType == HitEnum.MISS; } }
         public int Score;
 
         public Vector3 HitLocation;
 
-        public Hit(bool isHit, int score, Vector3 hitLocation)
+		public Hit(HitEnum hitType, int score, Vector3 hitLocation)
         {
-            IsHit = isHit;
+			this.hitType = hitType;
             Score = score;
             HitLocation = hitLocation;
         }
 
         public override string ToString()
         {
-            return String.Format("{isHit: {0}, score: {1}}", IsHit, Score);
+			return String.Format("{hitType: {0}, score: {1}}", hitType, Score);
         }
 
         public static Hit Miss()
         {
-            return new Hit(false, 0, Vector3.zero);
+			return new Hit(HitEnum.MISS, 0, Vector3.zero);
         }
+
+		public static Hit GameStateChange() 
+		{
+			return new Hit (HitEnum.GAME_STATE_CHANGE, 0, Vector3.zero);
+		}
     }
 }

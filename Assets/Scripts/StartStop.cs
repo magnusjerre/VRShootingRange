@@ -43,7 +43,7 @@ namespace Jerre
             canReciveHit = false;
             gameController.StartButtonClicked();
             hideDoor.Trigger();
-            return Hit.Miss();
+			return Hit.GameStateChange();
         }
 
         public void Notify(object notifier)

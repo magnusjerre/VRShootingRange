@@ -148,7 +148,7 @@ namespace Jerre
                 PlaySound(missSound);
             }
 
-            return new Hit(totalDestructionScore > 0, totalDestructionScore, hit.point);
+			return new Hit(totalDestructionScore > 0 ? HitEnum.HIT : HitEnum.MISS, totalDestructionScore, hit.point);
         }
 
         private void PlaySound(AudioClip soundClip)
