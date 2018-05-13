@@ -6,6 +6,7 @@ namespace Jerre
     {
         public Vector3 target;
         public bool onlyXZDirection = true;
+		public bool continuous = false;
 
         void Start()
         {
@@ -18,6 +19,19 @@ namespace Jerre
                 transform.LookAt(target);
             }
         }
+
+		void Update() {
+			if (continuous) {
+				if (onlyXZDirection)
+				{
+					transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
+				}
+				else
+				{
+					transform.LookAt(target);
+				}
+			}
+		}
 
     }
 }
