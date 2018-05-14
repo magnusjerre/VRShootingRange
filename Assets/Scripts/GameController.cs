@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Jerre
 {
-    public class GameController : MonoBehaviour, IHitlistener
+	public class GameController : MonoBehaviour, IHitlistener, IFireListener
     {
 
         public float gameTime;
@@ -35,6 +35,7 @@ namespace Jerre
         [SerializeField] private MultiplierStreak[] multiplierStreak;
         private int streakCounter, hitCount, missCount, bestStreak;
         private StartStop st;
+		public MJPlayer mjPlayer;
 
         void Awake()
         {
@@ -202,6 +203,7 @@ namespace Jerre
         {
             weaponScores.Put(weapon, 0);
             weapon.AddListener(this);
+			weapon.AddFireListener (this);
         }
 
         public void setStartStopInteractor(StartStop start) {
@@ -215,5 +217,13 @@ namespace Jerre
 			streakText.text = FormatScore (streak);
 			bestStreakText.text = FormatScore (bestStreak);
 		}
+
+		#region IFireListener implementation
+
+		public void NotifyFire (IWeapon weapon) {
+			mjPlayer.GetOtherWeapon (weapon).ResetCooldown ();
+		}
+
+		#endregion
     }
 }

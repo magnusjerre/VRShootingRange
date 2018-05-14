@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Jerre;
 
 namespace Jerre
 {
-    public class MJPlayer : MonoBehaviour
+	public class MJPlayer : MonoBehaviour
     {
         private List<IWeapon> activeWeaponList;
+
+		public IWeapon left, right;
 
         private int totalScore;
 
@@ -13,6 +16,7 @@ namespace Jerre
         void Awake()
         {
             activeWeaponList = new List<IWeapon>();
+			FindObjectOfType<GameController> ().mjPlayer = this;
         }
 
         void Start()
@@ -21,6 +25,13 @@ namespace Jerre
             foreach (var weapon in weapons)
             {
                 activeWeaponList.Add(weapon);
+				if (((Weapon) weapon).position == WeaponEnum.LEFT) {
+					left = weapon;
+				}
+				else 
+				{
+					right = weapon;
+				}
             }
         }
 
@@ -29,5 +40,18 @@ namespace Jerre
             return activeWeaponList[0];
         }
 
+		public IWeapon GetLeftWeapon() 
+		{
+			return left;
+		}
+
+		public IWeapon GetRightWeapon() 
+		{
+			return right;
+		}
+
+		public IWeapon GetOtherWeapon(IWeapon weapon) {
+			return weapon == left ? right : left;
+		}
     }
 }

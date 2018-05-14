@@ -20,8 +20,11 @@ namespace Jerre
         {
             if (Input.GetMouseButtonDown(0))
             {
-                player.EquippedWeapon().Fire();
+				player.GetLeftWeapon ().Fire ();
             }
+			else if (Input.GetMouseButtonDown (1)) {
+				player.GetRightWeapon ().Fire ();
+			}
         }
     }
 }
