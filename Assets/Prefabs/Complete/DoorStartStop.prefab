@@ -451,3 +451,4 @@ MonoBehaviour:
   hideDoor: {fileID: 114639020508918258}
   doorRenderer: {fileID: 23735556843709674}
   targetTransform: {fileID: 4022090671697228}
+  emitter: {fileID: 0}
