@@ -182,19 +182,19 @@ namespace Jerre
         private void ShowScore(int score, Vector3 position, bool receivedBonus, int bonus)
         {
             var scorePool = GameObject.FindGameObjectWithTag(Tags.SCORE_CANVAS_POOL).GetComponent<Pool>();
-            var scoreViewer = scorePool.Get<ScoreViewer>();
+            var scoreViewer = scorePool.Get<TargetScoreCanvas>();
             float distanceForScaleEqualToOneSqr = 330;
             float scale = 1f + 2f * position.sqrMagnitude / distanceForScaleEqualToOneSqr;
             Vector3 vScale = Vector3.one * scale;
             if (receivedBonus)
             {
-                scoreViewer.Show(score, false, position + Vector3.up * 0.5f, vScale);
-                var bonusScore = scorePool.Get<ScoreViewer>();
-                bonusScore.Show(bonus, true, position, vScale);
+				scoreViewer.Show(score, false, position + Vector3.up * 0.5f, vScale, mjPlayer.transform.position);
+                var bonusScore = scorePool.Get<TargetScoreCanvas>();
+				bonusScore.Show(bonus, true, position, vScale, mjPlayer.transform.position);
             }
             else
             {
-                scoreViewer.Show(score, false, position, vScale);
+				scoreViewer.Show(score, false, position, vScale, mjPlayer.transform.position);
             }
             Debug.Log("score: " + score);
         }

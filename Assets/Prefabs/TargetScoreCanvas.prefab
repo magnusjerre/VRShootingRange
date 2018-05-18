@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 223865252843328302}
   - component: {fileID: 114479558058506330}
   - component: {fileID: 114902025353388556}
-  - component: {fileID: 114477165563475328}
+  - component: {fileID: 114640265772079112}
   m_Layer: 5
-  m_Name: ScoreCanvas
+  m_Name: TargetScoreCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,24 +80,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 100pts
---- !u!114 &114477165563475328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676579800590684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409df7d82c9642441a9e78341bbdf217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 2
-  initialSpeed: 0.5
-  endScale: {x: 1.2, y: 1.2, z: 1.2}
-  positiveScoreColor: {r: 0, g: 1, b: 0, a: 1}
-  negativeScoreColor: {r: 1, g: 0, b: 0, a: 1}
-  bonusScoreColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  zeroColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &114479558058506330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +101,24 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1500
+--- !u!114 &114640265772079112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676579800590684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b7be27b1c64f54ab47cfd5206bf7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
+  endScale: {x: 1.2, y: 1.2, z: 1.2}
+  deltaPos: {x: 0, y: 1, z: 0}
+  positiveScoreColor: {r: 0, g: 1, b: 0, a: 1}
+  negativeScoreColor: {r: 1, g: 0, b: 0, a: 1}
+  bonusScoreColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  zeroScoreColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &114902025353388556
 MonoBehaviour:
   m_ObjectHideFlags: 1
