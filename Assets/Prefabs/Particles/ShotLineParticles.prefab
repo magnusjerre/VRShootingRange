@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198072057796415324}
   - component: {fileID: 199336563575370254}
   m_Layer: 0
-  m_Name: ShotLineParticles_New
+  m_Name: ShotLineParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

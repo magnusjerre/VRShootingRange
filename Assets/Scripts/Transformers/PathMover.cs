@@ -13,7 +13,7 @@ namespace Jerre
         public Space space;
         private float elapsedTime;
 
-
+		[SerializeField] bool destroyOnFinished = false;
         // Use this for initialization
         void Start()
         {
@@ -51,6 +51,9 @@ namespace Jerre
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / time);
+			if (destroyOnFinished && t >= 1f) {
+				Destroy (transform.gameObject);
+			}
             Vector3 p0 = GetPos(0);
             Vector3 p1 = GetPos(1);
             if (IsCubic())

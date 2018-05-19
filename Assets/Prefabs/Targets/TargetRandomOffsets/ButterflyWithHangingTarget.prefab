@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1581981216273636}
+  m_IsPrefabParent: 1
+--- !u!1 &1581981216273636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4634557558812594}
+  - component: {fileID: 114879158318573224}
+  m_Layer: 0
+  m_Name: ButterflyWithHangingTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4634557558812594
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581981216273636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114879158318573224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581981216273636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e919da3b55f29449a9c0a7b21a7d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreTexture: {fileID: 2800000, guid: f204bc5d9c4f5415280731af29ca4fea, type: 3}
+  triggerObjectPrefab: {fileID: 4248782936603288, guid: 920a531c3d23240829dc24a88aae69c0,
+    type: 2}
+  offsetObjectPrefab: {fileID: 4166586904364864, guid: 8ba3a7389fee4da4d9bb1b4b2b1cf42f,
+    type: 2}
+  targetModelPrefab: {fileID: 4195259093511360, guid: 6b4286b18373245b4890296b410c6fae,
+    type: 2}
+  hitParticlesPrefab: {fileID: 198939113912366042, guid: fa6c27b4ba37a4aa495c5e939a6e5fc9,
+    type: 2}
+  MaxScore: 100
+  AllowNegativeScore: 0
+  IsPlainScoreTarget: 0
+  FaceForward: 0
+  lifetime: 5
+  bullseyeHitSound: {fileID: 0}
+  missSound: {fileID: 0}

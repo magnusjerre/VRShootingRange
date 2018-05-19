@@ -86,7 +86,7 @@ namespace Jerre
             isPlaying = true;
             for (var i = 0; i < gameTargetSpawners.Length; i++)
             {
-                gameTargetSpawners[i].StartSpawningProcess();
+				gameTargetSpawners [i].StartSpawningProcess ();
             }
             var weapons = weaponScores.Keys;
             for (var i = 0; i < weapons.Count; i++)

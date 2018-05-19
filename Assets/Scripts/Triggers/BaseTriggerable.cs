@@ -11,11 +11,12 @@ namespace Jerre
 
         protected void Awake()
         {
-            _listeners = new List<IListener>();
-            for (var i = 0; i < mListeners.Count; i++)
-            {
-                AddListener((IListener)mListeners[i]);
-            }
+			_listeners = new List<IListener> ();
+			if (mListeners != null) {
+				for (var i = 0; i < mListeners.Count; i++) {
+					AddListener ((IListener)mListeners [i]);
+				}
+			}
         }
 
         public void Notify(object notifier)
@@ -48,5 +49,12 @@ namespace Jerre
                 _listeners[i].Notify(this);
             }
         }
+
+		public void AddProgrammatically(IListener listener) {
+			if (_listeners == null) {
+				_listeners = new List<IListener> ();
+			}
+			AddListener(listener);
+		}
     }
 }
