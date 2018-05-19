@@ -3,7 +3,7 @@
     public interface IWeapon
     {
         bool Fire();
-        void AddListener(IHitlistener listener);
+        void AddHitListener(IHitlistener listener);
 		void AddFireListener(IFireListener listener);
 		void ResetCooldown();
     }

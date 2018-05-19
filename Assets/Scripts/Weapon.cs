@@ -5,26 +5,19 @@ namespace Jerre
     [RequireComponent(typeof(AudioSource))]
 	public class Weapon : MonoBehaviour, IWeapon
     {
-        public Transform muzzleCalculation, muzzleVisual;
-		private ParticleSystem muzzleSmokeParticles;
-
-        public float FireInterval = 1f;
-        public float MaxShotLength = 20f;
-        private float elapsedTime;
-
-        private IHitlistener hitListener;
-		private IFireListener fireListener;
-		Pool magazine;
-        private AudioSource audioShot;
-        
-        private Animator animator;
-
 		public WeaponEnum position;
+        
+		[SerializeField] Transform muzzleCalculation, muzzleVisual;
+		[SerializeField] float FireInterval = 1f;
+		[SerializeField] float MaxShotLength = 40f;
 
-        public bool CanFire()
-        {
-            return elapsedTime >= FireInterval;
-        }
+		float timeSinceLastShot;
+        IHitlistener hitListener;
+		IFireListener fireListener;
+		ParticleSystem muzzleSmokeParticles;
+		Pool magazine;
+        AudioSource audioShot;
+        
 
         void Start()
         {
@@ -40,43 +33,37 @@ namespace Jerre
 			muzzleSmokeParticles.transform.localPosition = Vector3.zero;
 			muzzleSmokeParticles.transform.localScale = Vector3.one;
 			muzzleSmokeParticles.transform.localRotation = Quaternion.identity;
-            elapsedTime = FireInterval;
+            timeSinceLastShot = FireInterval;
             GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
-            animator = GetComponentInChildren<Animator>();
         }
 
         void Update()
         {
-            elapsedTime += Time.deltaTime;
+            timeSinceLastShot += Time.deltaTime;
         }
 
 
         public bool Fire()
         {
-            if (!CanFire())
+			if (timeSinceLastShot < FireInterval)
             {
                 return false;
             }
+
+			timeSinceLastShot = 0f;
 			fireListener.NotifyFire (this);
 			audioShot.Play();
 			muzzleSmokeParticles.Play();
-			if (animator != null) {
-				animator.SetTrigger("Fire");
-			}
-			elapsedTime = 0f;
-
-			var bullet = magazine.Get<BulletRay> ();
-			bullet.Fire (muzzleVisual, this, muzzleCalculation, hitListener);
-
+			magazine.Get<BulletRay> ().Fire (muzzleVisual, this, muzzleCalculation, hitListener);
 			return true;
         }
 
 		public void ResetCooldown() 
 		{
-			elapsedTime = FireInterval + 1f;
+			timeSinceLastShot = FireInterval;
 		}
 
-        public void AddListener(IHitlistener listener)
+        public void AddHitListener(IHitlistener listener)
         {
             if (this.hitListener == null)
             {

@@ -202,7 +202,7 @@ namespace Jerre
         public void AddWeapon(IWeapon weapon)
         {
             weaponScores.Put(weapon, 0);
-            weapon.AddListener(this);
+            weapon.AddHitListener(this);
 			weapon.AddFireListener (this);
         }
 
