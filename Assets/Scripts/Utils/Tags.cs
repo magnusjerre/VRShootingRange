@@ -9,5 +9,6 @@
         public const string SHOT_POOL = "ShotPool";
         public const string AUDIO_SOURCE_POOL = "AudioSourcePool";
 		public const string ACTUAL_TARGET = "ActualTarget";
+		public const string BULLET_POOL = "BulletPool";
     }
 }

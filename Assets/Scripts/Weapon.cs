@@ -14,7 +14,7 @@ namespace Jerre
 
         private IHitlistener hitListener;
 		private IFireListener fireListener;
-        private Pool shotRendererPool;
+		Pool magazine;
         private AudioSource audioShot;
         
         private Animator animator;
@@ -34,7 +34,7 @@ namespace Jerre
             
 			audioShot = GetComponent<AudioSource>();
             audioShot.playOnAwake = false;
-            shotRendererPool = GameObject.FindGameObjectWithTag(Tags.SHOT_POOL).GetComponent<Pool>();
+			magazine = GetComponentInChildren<Pool> ();
             muzzleSmokeParticles = GetComponentInChildren<ParticleSystem>();
 			muzzleSmokeParticles.transform.parent = muzzleVisual;
 			muzzleSmokeParticles.transform.localPosition = Vector3.zero;
@@ -43,7 +43,6 @@ namespace Jerre
             elapsedTime = FireInterval;
             GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().AddWeapon(this);
             animator = GetComponentInChildren<Animator>();
-
         }
 
         void Update()
@@ -59,43 +58,17 @@ namespace Jerre
                 return false;
             }
 			fireListener.NotifyFire (this);
-
-			bool result = false;
-
-            audioShot.Play();
+			audioShot.Play();
 			muzzleSmokeParticles.Play();
-            if (animator != null) {
-                animator.SetTrigger("Fire");
-            }
-            Ray ray = new Ray(muzzleCalculation.position, muzzleCalculation.forward);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, MaxShotLength))
-            {
-				shotRendererPool.Get<ShotRenderer>().ShowShot(muzzleVisual.position, hit.point);
-                var targetCollider = hit.collider.GetComponent<TargetCollider>();
-                if (targetCollider != null)
-                {
-                    Hit tHit = targetCollider.GetOwner<IHittable>().RegisterHit(hit);
-                    if (hitListener != null)
-                    {
-                        hitListener.NotifyHit(tHit, this);
-                    }
-				} 
-				else if (hitListener != null)
-                {
-                    hitListener.NotifyHit(Hit.Miss(), this);
-                }
-            }
-            else
-            {
-                if (hitListener != null)
-                {
-                    hitListener.NotifyHit(Hit.Miss(), this);
-                }
-                shotRendererPool.Get<ShotRenderer>().ShowShot(muzzleVisual.position, muzzleVisual.position + muzzleVisual.forward * MaxShotLength);
-            }
-            elapsedTime = 0f;
-            return true;
+			if (animator != null) {
+				animator.SetTrigger("Fire");
+			}
+			elapsedTime = 0f;
+
+			var bullet = magazine.Get<BulletRay> ();
+			bullet.Fire (muzzleVisual, this, muzzleCalculation, hitListener);
+
+			return true;
         }
 
 		public void ResetCooldown() 

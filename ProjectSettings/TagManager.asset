@@ -10,6 +10,7 @@ TagManager:
   - ShotPool
   - AudioSourcePool
   - ActualTarget
+  - BulletPool
   layers:
   - Default
   - TransparentFX
